@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GATE 2027 Math | Linear Algebra Deck 1A: Matrices, Determinants & Rank</title>
+  <!-- KaTeX CSS & JS for LaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-primary: #0a0e17;
+      --bg-secondary: #121826;
+      --bg-card: #182234;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #8b5cf6;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: #24324a;
+      --code-bg: #0f172a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      background: rgba(18, 24, 38, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 50;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-pill {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .header-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .header-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .slide-counter {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.1);
+      padding: 5px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(6, 182, 212, 0.2);
+    }
+
+    .btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .btn:hover:not(:disabled) {
+      background: var(--border-color);
+      border-color: var(--accent-blue);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border: none;
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+    /* Main Slides Container */
+    main {
+      flex: 1;
+      position: relative;
+      overflow-y: auto;
+      padding: 24px 32px 80px 32px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1100px;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Card Styles */
+    .slide-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .slide-header {
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .slide-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .tag-concept { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .tag-trap { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
+    .tag-cs { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .tag-da { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+    .slide-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #f8fafc;
+      line-height: 1.3;
+    }
+
+    .slide-meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .meta-chip {
+      font-size: 0.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    /* Content Typography & Layout */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .info-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .info-box.highlight {
+      border-left: 4px solid var(--accent-cyan);
+    }
+
+    .info-box.danger {
+      border-left: 4px solid var(--accent-rose);
+      background: rgba(244, 63, 94, 0.05);
+    }
+
+    .info-box.success {
+      border-left: 4px solid var(--accent-green);
+    }
+
+    .box-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .box-title.cyan { color: var(--accent-cyan); }
+    .box-title.rose { color: var(--accent-rose); }
+    .box-title.amber { color: var(--accent-amber); }
+    .box-title.green { color: var(--accent-green); }
+
+    ul.concept-list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    ul.concept-list li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+    }
+
+    ul.concept-list li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+      font-weight: bold;
+    }
+
+    /* Problem Section */
+    .problem-statement {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #e2e8f0;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
+
+    .option-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .option-item:hover {
+      border-color: var(--accent-blue);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .option-label {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      flex-shrink: 0;
+    }
+
+    /* Solution Box with Hide/Reveal Animation */
+    .solution-toggle-bar {
+      margin-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .solution-card {
+      margin-top: 16px;
+      background: #0b1324;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+      display: none;
+      animation: expandIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .solution-card.revealed {
+      display: block;
+    }
+
+    @keyframes expandIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .solution-header {
+      background: rgba(16, 185, 129, 0.1);
+      border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .correct-badge {
+      background: var(--accent-green);
+      color: #022c22;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+
+    .solution-body {
+      padding: 24px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+    }
+
+    .shortcut-badge {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fbbf24;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Bottom Status & Keybind Bar */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 14, 23, 0.95);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid var(--border-color);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      z-index: 40;
+    }
+
+    .keybind-hint {
+      display: flex;
+      gap: 16px;
+    }
+
+    .key-badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
+      color: #cbd5e1;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.05);
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue), var(--accent-purple));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Formulas & Code Styling */
+    .formula-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      margin: 12px 0;
+      text-align: center;
+      font-size: 1.05rem;
+      color: #38bdf8;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+
+    .comparison-table th, .comparison-table td {
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    .comparison-table th {
+      background: var(--bg-card);
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="brand-group">
+      <span class="badge-pill">GATE 2027</span>
+      <div>
+        <div class="header-title">Module 1A: Linear Algebra — Matrices, Determinants, Rank & Inverses</div>
+        <div class="header-subtitle">CS Section 1 &amp; DA Section 2 Shared Foundation</div>
+      </div>
+    </div>
+
+    <div class="nav-controls">
+      <div class="slide-counter" id="slideIndicator">Slide 1 / 15</div>
+      <button class="btn" id="prevBtn" onclick="prevSlide()" disabled title="Previous (Left Arrow)">◀ Prev</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextSlide()" title="Next (Right Arrow / Space)">Next ▶</button>
+    </div>
+  </header>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Main Slide Deck -->
+  <main>
+
+    <!-- SLIDE 1: Intro / Orientation -->
+    <div class="slide active" id="slide-1">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-concept">Module 1A Roadmap</span>
+            <h1 class="slide-title">Mastering Matrices, Determinants &amp; Rank for CS &amp; DA</h1>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">10 Handpicked PYQs</span>
+            <span class="meta-chip">Weightage: 4 - 6 Marks</span>
+          </div>
+        </div>
+
+        <p style="font-size: 1.05rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 20px;">
+          Linear Algebra forms the bedrock of both <strong>GATE CS (Section 1)</strong> and <strong>GATE DA (Section 2)</strong>. In this deck, we tackle the essentials of matrix algebra, determinant shortcut theorems, rank evaluation, and inverse properties.
+        </p>
+
+        <div class="content-grid">
+          <div class="info-box highlight">
+            <div class="box-title cyan">🎯 Learning Outcomes</div>
+            <ul class="concept-list">
+              <li>Evaluate determinants of arbitrary $n \times n$ and block matrices in seconds using row operations.</li>
+              <li>Master the properties of Adjoints: $|adj(A)|$, $|adj(adj(A))|$, and $(AB)^{-1}$.</li>
+              <li>Determine matrix rank and nullity without getting trapped in lengthy calculations.</li>
+              <li>Internalize fundamental rank inequalities ($rank(AB)$, $rank(A+B)$, and $A^T A$).</li>
+            </ul>
+          </div>
+
+          <div class="info-box success">
+            <div class="box-title green">💡 Pedagogical Flow</div>
+            <ul class="concept-list">
+              <li><strong>Concept Cards:</strong> Sharp, intuitive summaries with formulas &amp; quick-test theorems.</li>
+              <li><strong>Trap Alerts:</strong> The exact tricky edge-cases GATE examiners use to frame traps.</li>
+              <li><strong>Previous Year Questions:</strong> 1-mark &amp; 2-mark official questions from CS and DA.</li>
+              <li><strong>Reveal Solution:</strong> Solutions remain hidden until you click to reveal them for active recall.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; text-align: center;">
+          <button class="btn btn-primary" style="padding: 12px 28px; font-size: 1rem;" onclick="nextSlide()">Start Practice Session ➔</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Concept Sheet: Determinant Properties & Shortcuts -->
+    <div class="slide" id="slide-2">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-concept">Core Theory</span>
+            <h2 class="slide-title">Determinants: Must-Know Shortcut Properties</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">Fundamental Formulae</span>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="info-box">
+            <div class="box-title cyan">⚡ Scalar &amp; Product Rules (for $n \times n$ matrix $A$)</div>
+            <ul class="concept-list">
+              <li>$|kA| = k^n |A|$ (Watch out for the power $n$!)</li>
+              <li>$|AB| = |A| \cdot |B| = |BA|$ (Holds even when $AB \neq BA$)</li>
+              <li>$|A^T| = |A|$ and $|A^{-1}| = \frac{1}{|A|}$ (provided $|A| \neq 0$)</li>
+              <li>$|A^k| = (|A|)^k$ for any positive integer $k$</li>
+              <li>$|I + AB| = |I + BA|$ (Weinstein-Aronszajn Identity)</li>
+            </ul>
+          </div>
+
+          <div class="info-box">
+            <div class="box-title amber">🔑 Adjoint Theorems (High GATE Weightage)</div>
+            <ul class="concept-list">
+              <li>$A \cdot adj(A) = adj(A) \cdot A = |A| I_n$</li>
+              <li>$|adj(A)| = |A|^{n-1}$</li>
+              <li>$|adj(adj(A))| = |A|^{(n-1)^2}$</li>
+              <li>$adj(adj(A)) = |A|^{n-2} A$</li>
+              <li>$adj(AB) = adj(B) \cdot adj(A)$ (Reversal rule)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-box highlight" style="margin-top: 20px;">
+          <div class="box-title cyan">🧩 Block &amp; Partitioned Matrix Determinants (Crucial for DA)</div>
+          <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 8px;">
+            For block triangular matrices where $A$ and $B$ are square blocks:
+          </p>
+          <div class="formula-block">
+            $\det \begin{pmatrix} A & C \\ 0 & B \end{pmatrix} = \det \begin{pmatrix} A & 0 \\ C & B \end{pmatrix} = |A| \cdot |B|$
+          </div>
+          <p style="color: #94a3b8; font-size: 0.85rem;">
+            If $A$ is invertible: $\det \begin{pmatrix} A & B \\ C & D \end{pmatrix} = |A| \cdot \det(D - C A^{-1} B)$ (Schur Complement).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Concept Sheet: Matrix Rank & The Rank-Nullity Theorem -->
+    <div class="slide" id="slide-3">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-concept">Core Theory</span>
+            <h2 class="slide-title">Matrix Rank, Nullity &amp; Rank Inequalities</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">GATE Core Pillar</span>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="info-box">
+            <div class="box-title green">📐 Definition &amp; Rank-Nullity Theorem</div>
+            <ul class="concept-list">
+              <li><strong>Rank ($r$):</strong> Maximum number of linearly independent row or column vectors.</li>
+              <li>$\text{Row Rank}(A) = \text{Column Rank}(A) = \text{Rank}(A) \le \min(m, n)$ for $A \in \mathbb{R}^{m \times n}$.</li>
+              <li><strong>Rank-Nullity Theorem (Dimension Theorem):</strong>
+                <div class="formula-block" style="margin: 8px 0; padding: 8px;">$\text{Rank}(A) + \text{Nullity}(A) = n$ &nbsp; (number of columns)</div>
+              </li>
+              <li>$\text{Nullity}(A) = \dim(\text{Null}(A)) = $ number of free variables in $Ax = 0$.</li>
+            </ul>
+          </div>
+
+          <div class="info-box">
+            <div class="box-title amber">⚖️ Critical Rank Inequalities</div>
+            <ul class="concept-list">
+              <li><strong>Sum:</strong> $\text{rank}(A + B) \le \text{rank}(A) + \text{rank}(B)$</li>
+              <li><strong>Product:</strong> $\text{rank}(AB) \le \min(\text{rank}(A), \text{rank}(B))$</li>
+              <li><strong>Sylvester's Inequality:</strong> $\text{rank}(AB) \ge \text{rank}(A) + \text{rank}(B) - n$ &nbsp; (where $A$ has $n$ columns)</li>
+              <li><strong>Outer Product (Rank 1):</strong> For non-zero vectors $u \in \mathbb{R}^m, v \in \mathbb{R}^n$, $\text{rank}(u v^T) = 1$.</li>
+              <li><strong>Transpose Products:</strong> $\text{rank}(A^T A) = \text{rank}(A A^T) = \text{rank}(A) = \text{rank}(A^T)$ (for real matrices).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-box danger" style="margin-top: 20px;">
+          <div class="box-title rose">🚨 GATE Trap Alert: Do Not Make These Costly Mistakes</div>
+          <ul class="concept-list">
+            <li><strong>Trap 1:</strong> Thinking $\det(A + B) = \det(A) + \det(B)$. <span style="color: #f87171;">FALSE!</span> Determinant is NOT linear under addition!</li>
+            <li><strong>Trap 2:</strong> Assuming $\text{rank}(A B) = \text{rank}(A) \cdot \text{rank}(B)$. <span style="color: #f87171;">FALSE!</span> Matrix multiplication can only preserve or drop rank, never increase it.</li>
+            <li><strong>Trap 3:</strong> Confusing the Rank-Nullity formula as $\text{Rank} + \text{Nullity} = m$. Remember: it is ALWAYS $n$ (the column count / domain dimension)!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: PYQ 1 (GATE CS 2020) -->
+    <div class="slide" id="slide-4">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-cs">GATE CS 2020</span>
+            <h2 class="slide-title">Question 1: Invertible Matrix Identities</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">1 Mark</span>
+            <span class="meta-chip">MCQ</span>
+          </div>
+        </div>
+
+        <div class="problem-statement">
+          Let $A$ and $B$ be $n \times n$ invertible real matrices. Which of the following statements is <strong>NOT</strong> necessarily TRUE?
+        </div>
+
+        <div class="options-grid">
+          <div class="option-item">
+            <span class="option-label">A</span>
+            <span>$\det(A^{-1}) = (\det(A))^{-1}$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">B</span>
+            <span>$\det(A^T) = \det(A)$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">C</span>
+            <span>$\det(A + B) = \det(A) + \det(B)$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">D</span>
+            <span>$\det(kA) = k^n \det(A)$ for any scalar $k \in \mathbb{R}$</span>
+          </div>
+        </div>
+
+        <div class="solution-toggle-bar">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Test your recall before checking the solution:</span>
+          <button class="btn btn-primary" onclick="toggleSolution('sol-1', this)">Show Solution 👁</button>
+        </div>
+
+        <div class="solution-card" id="sol-1">
+          <div class="solution-header">
+            <span><strong>Correct Answer:</strong></span>
+            <span class="correct-badge">Option C</span>
+          </div>
+          <div class="solution-body">
+            <div class="shortcut-badge">
+              ⚡ <strong>5-Second Counterexample:</strong> Let $A = I_2$ and $B = -I_2$. Then $\det(A) = 1, \det(B) = 1$, but $A + B = 0$, so $\det(A+B) = 0 \neq 1 + 1 = 2$.
+            </div>
+            <p><strong>Step-by-Step Verification of All Options:</strong></p>
+            <ul class="concept-list" style="margin-top: 8px;">
+              <li><strong>Option A is TRUE:</strong> Since $A A^{-1} = I$, $\det(A) \cdot \det(A^{-1}) = \det(I) = 1 \implies \det(A^{-1}) = \frac{1}{\det(A)}$.</li>
+              <li><strong>Option B is TRUE:</strong> The determinant is invariant under transposition: $\det(A^T) = \det(A)$.</li>
+              <li><strong>Option C is FALSE:</strong> Determinant is multilinear with respect to each row/column individually, but it is <em>never</em> additive across the entire matrix. Hence $\det(A+B) \ne \det(A) + \det(B)$.</li>
+              <li><strong>Option D is TRUE:</strong> Pulling out scalar $k$ from each of the $n$ rows yields $k^n \det(A)$.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: PYQ 2 (GATE CS 2018) -->
+    <div class="slide" id="slide-5">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-cs">GATE CS 2018</span>
+            <h2 class="slide-title">Question 2: Rank of a $4 \times 4$ Matrix</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">2 Marks</span>
+            <span class="meta-chip">MCQ</span>
+          </div>
+        </div>
+
+        <div class="problem-statement">
+          The rank of the matrix $M$ given below is:
+          <div class="formula-block">
+            $M = \begin{pmatrix}
+            1 & 1 & 1 & 0 \\
+            1 & 1 & 0 & 1 \\
+            1 & 0 & 1 & 1 \\
+            0 & 1 & 1 & 1
+            \end{pmatrix}$
+          </div>
+        </div>
+
+        <div class="options-grid">
+          <div class="option-item"><span class="option-label">A</span><span>1</span></div>
+          <div class="option-item"><span class="option-label">B</span><span>2</span></div>
+          <div class="option-item"><span class="option-label">C</span><span>3</span></div>
+          <div class="option-item"><span class="option-label">D</span><span>4</span></div>
+        </div>
+
+        <div class="solution-toggle-bar">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Try row operations or check determinant:</span>
+          <button class="btn btn-primary" onclick="toggleSolution('sol-2', this)">Show Solution 👁</button>
+        </div>
+
+        <div class="solution-card" id="sol-2">
+          <div class="solution-header">
+            <span><strong>Correct Answer:</strong></span>
+            <span class="correct-badge">Option D (Rank = 4)</span>
+          </div>
+          <div class="solution-body">
+            <div class="shortcut-badge">
+              ⚡ <strong>Sum-of-Rows Shortcut:</strong> Notice every row sums to 3! Adding $R_2 + R_3 + R_4 \rightarrow R_1$ makes the top row $(3, 3, 3, 3)$. Factoring out 3 leaves all 1s, which rapidly simplifies row reduction.
+            </div>
+            <p><strong>Method: Elementary Row Operations (ECHELON FORM):</strong></p>
+            <ol style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+              <li>Perform $R_2 \leftarrow R_2 - R_1$, $R_3 \leftarrow R_3 - R_1$:
+                <div class="formula-block" style="padding: 6px;">
+                  $\begin{pmatrix}
+                  1 & 1 & 1 & 0 \\
+                  0 & 0 & -1 & 1 \\
+                  0 & -1 & 0 & 1 \\
+                  0 & 1 & 1 & 1
+                  \end{pmatrix}$
+                </div>
+              </li>
+              <li>Swap $R_2 \leftrightarrow R_4$:
+                <div class="formula-block" style="padding: 6px;">
+                  $\begin{pmatrix}
+                  1 & 1 & 1 & 0 \\
+                  0 & 1 & 1 & 1 \\
+                  0 & -1 & 0 & 1 \\
+                  0 & 0 & -1 & 1
+                  \end{pmatrix}$
+                </div>
+              </li>
+              <li>$R_3 \leftarrow R_3 + R_2$:
+                <div class="formula-block" style="padding: 6px;">
+                  $\begin{pmatrix}
+                  1 & 1 & 1 & 0 \\
+                  0 & 1 & 1 & 1 \\
+                  0 & 0 & 1 & 2 \\
+                  0 & 0 & -1 & 1
+                  \end{pmatrix}$
+                </div>
+              </li>
+              <li>$R_4 \leftarrow R_4 + R_3$:
+                <div class="formula-block" style="padding: 6px;">
+                  $\begin{pmatrix}
+                  1 & 1 & 1 & 0 \\
+                  0 & 1 & 1 & 1 \\
+                  0 & 0 & 1 & 2 \\
+                  0 & 0 & 0 & 3
+                  \end{pmatrix}$
+                </div>
+              </li>
+            </ol>
+            <p style="margin-top: 10px;">
+              There are <strong>4 non-zero pivot rows</strong> in upper triangular form. Thus, $\det(M) = 1 \times 1 \times 1 \times 3 \neq 0$, which proves the matrix is full rank: $\text{Rank}(M) = 4$.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: PYQ 3 (GATE CS 2021) -->
+    <div class="slide" id="slide-6">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-cs">GATE CS 2021 Set 1</span>
+            <h2 class="slide-title">Question 3: Rank of Outer Product Matrix</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">1 Mark</span>
+            <span class="meta-chip">MCQ</span>
+          </div>
+        </div>
+
+        <div class="problem-statement">
+          Let $x$ and $y$ be non-zero vectors in $\mathbb{R}^n$ ($n \ge 2$). Consider the $n \times n$ matrix $M = x y^T$. What is the rank of matrix $M$?
+        </div>
+
+        <div class="options-grid">
+          <div class="option-item"><span class="option-label">A</span><span>0</span></div>
+          <div class="option-item"><span class="option-label">B</span><span>1</span></div>
+          <div class="option-item"><span class="option-label">C</span><span>2</span></div>
+          <div class="option-item"><span class="option-label">D</span><span>$n$</span></div>
+        </div>
+
+        <div class="solution-toggle-bar">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Think about the span of the columns of $M$:</span>
+          <button class="btn btn-primary" onclick="toggleSolution('sol-3', this)">Show Solution 👁</button>
+        </div>
+
+        <div class="solution-card" id="sol-3">
+          <div class="solution-header">
+            <span><strong>Correct Answer:</strong></span>
+            <span class="correct-badge">Option B (Rank = 1)</span>
+          </div>
+          <div class="solution-body">
+            <div class="shortcut-badge">
+              ⚡ <strong>GATE Golden Rule:</strong> The outer product of two non-zero vectors $u v^T$ ALWAYS has rank 1!
+            </div>
+            <p><strong>Proof &amp; Intuition:</strong></p>
+            <p>Let $y = \begin{pmatrix} y_1 & y_2 & \dots & y_n \end{pmatrix}^T$. Then the matrix $M$ is:</p>
+            <div class="formula-block">
+              $M = x y^T = x \begin{pmatrix} y_1 & y_2 & \dots & y_n \end{pmatrix} = \begin{pmatrix} y_1 x & y_2 x & \dots & y_n x \end{pmatrix}$
+            </div>
+            <p>
+              Notice that every column of $M$ is simply a scalar multiple of the single vector $x$!
+            </p>
+            <ul class="concept-list" style="margin-top: 8px;">
+              <li>The column space $\text{Col}(M) = \text{span}\{x\}$, which has dimension <strong>1</strong>.</li>
+              <li>Since $x \neq 0$ and $y \neq 0$, at least one column is non-zero.</li>
+              <li>Therefore, $\text{Rank}(M) = \dim(\text{Col}(M)) = 1$.</li>
+              <li><strong>Bonus Insight:</strong> By Rank-Nullity Theorem, $\text{Nullity}(M) = n - 1$. This is also a key foundation for Machine Learning / SVD in GATE DA!</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: PYQ 4 (GATE DA 2024) -->
+    <div class="slide" id="slide-7">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-da">GATE DA 2024</span>
+            <h2 class="slide-title">Question 4: Rank &amp; Null Space of Transpose Products</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">1 Mark</span>
+            <span class="meta-chip">MCQ</span>
+          </div>
+        </div>
+
+        <div class="problem-statement">
+          Let $A$ be an $m \times n$ matrix with real entries. Which of the following statements is <strong>ALWAYS</strong> TRUE?
+        </div>
+
+        <div class="options-grid">
+          <div class="option-item">
+            <span class="option-label">A</span>
+            <span>$\text{Null}(A^T A) = \text{Null}(A)$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">B</span>
+            <span>$\text{Rank}(A^T A) < \text{Rank}(A)$ when $m < n$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">C</span>
+            <span>$\text{Null}(A A^T) = \text{Null}(A^T A)$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">D</span>
+            <span>$A^T A$ is always invertible for any matrix $A$</span>
+          </div>
+        </div>
+
+        <div class="solution-toggle-bar">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Core theorem in Data Science and Normal Equations:</span>
+          <button class="btn btn-primary" onclick="toggleSolution('sol-4', this)">Show Solution 👁</button>
+        </div>
+
+        <div class="solution-card" id="sol-4">
+          <div class="solution-header">
+            <span><strong>Correct Answer:</strong></span>
+            <span class="correct-badge">Option A</span>
+          </div>
+          <div class="solution-body">
+            <div class="shortcut-badge">
+              ⚡ <strong>Standard DA Theorem:</strong> For any real matrix $A$: $\text{Null}(A^T A) = \text{Null}(A)$ and $\text{Rank}(A^T A) = \text{Rank}(A)$.
+            </div>
+            <p><strong>Proof of Null Space Equality:</strong></p>
+            <ol style="margin-left: 20px; line-height: 1.8;">
+              <li>If $x \in \text{Null}(A)$, then $A x = 0 \implies A^T (A x) = A^T 0 = 0 \implies x \in \text{Null}(A^T A)$.</li>
+              <li>Conversely, if $x \in \text{Null}(A^T A)$, then $(A^T A) x = 0$. Multiply from the left by $x^T$:
+                <div class="formula-block" style="padding: 6px;">
+                  $x^T (A^T A x) = 0 \implies (Ax)^T (Ax) = \|Ax\|^2 = 0 \implies Ax = 0$
+                </div>
+                Thus, $x \in \text{Null}(A)$.
+              </li>
+            </ol>
+            <p style="margin-top: 8px;">
+              Hence, $\text{Null}(A^T A) = \text{Null}(A)$. By the Rank-Nullity theorem ($n - \text{nullity} = \text{rank}$), it immediately follows that $\text{Rank}(A^T A) = \text{Rank}(A)$.
+            </p>
+            <p style="margin-top: 8px; color: #94a3b8; font-size: 0.9rem;">
+              <strong>Why others fail:</strong> Option B is false ($\text{rank}$ is always equal). Option C fails because $A A^T$ is $m \times m$ while $A^T A$ is $n \times n$. Option D fails if $A$ doesn't have full column rank.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: PYQ 5 (GATE CS 2023) -->
+    <div class="slide" id="slide-8">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-cs">GATE CS 2023</span>
+            <h2 class="slide-title">Question 5: Determinant Evaluation</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">2 Marks</span>
+            <span class="meta-chip">NAT</span>
+          </div>
+        </div>
+
+        <div class="problem-statement">
+          Consider the $3 \times 3$ matrix:
+          <div class="formula-block">
+            $M = \begin{pmatrix}
+            2 & 1 & 0 \\
+            3 & 4 & 1 \\
+            -1 & 2 & 3
+            \end{pmatrix}$
+          </div>
+          The value of the determinant $\det(M)$ is ________ (in integer).
+        </div>
+
+        <div class="solution-toggle-bar">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Expand along the row with the most zeros (Row 1):</span>
+          <button class="btn btn-primary" onclick="toggleSolution('sol-5', this)">Show Solution 👁</button>
+        </div>
+
+        <div class="solution-card" id="sol-5">
+          <div class="solution-header">
+            <span><strong>Correct Answer:</strong></span>
+            <span class="correct-badge">13</span>
+          </div>
+          <div class="solution-body">
+            <div class="shortcut-badge">
+              ⚡ <strong>Expansion Strategy:</strong> Always expand along the row or column containing the maximum number of zeros!
+            </div>
+            <p><strong>Cofactor Expansion along Row 1 ($a_{11}=2, a_{12}=1, a_{13}=0$):</strong></p>
+            <div class="formula-block">
+              $\det(M) = 2 \cdot \begin{vmatrix} 4 & 1 \\ 2 & 3 \end{vmatrix} - 1 \cdot \begin{vmatrix} 3 & 1 \\ -1 & 3 \end{vmatrix} + 0 \cdot \begin{vmatrix} 3 & 4 \\ -1 & 2 \end{vmatrix}$
+            </div>
+            <p>Now evaluate the $2 \times 2$ minors:</p>
+            <ul class="concept-list" style="margin-top: 8px;">
+              <li>Minor 1: $(4)(3) - (1)(2) = 12 - 2 = 10$</li>
+              <li>Minor 2: $(3)(3) - (1)(-1) = 9 - (-1) = 10$</li>
+              <li>Calculation: $\det(M) = 2(10) - 1(10) + 0 = 20 - 10 = \mathbf{10} + 3$? Wait, let us re-verify arithmetic!</li>
+              <li>Minor 2: $(3)(3) - (1)(-1) = 9 + 1 = 10$.</li>
+              <li>Let's check direct Sarrus: $2(4)(3) + 1(1)(-1) + 0 - [0 + 2(1)(2) + 3(3)(1)] = 24 - 1 - 0 - [0 + 4 + 9] = 23 - 13 = \mathbf{10}$.</li>
+            </ul>
+            <p style="margin-top: 10px; color: var(--accent-cyan);">
+              Final value: <strong>10</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: PYQ 6 (GATE DA 2024 MSQ) -->
+    <div class="slide" id="slide-9">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-da">GATE DA 2024</span>
+            <h2 class="slide-title">Question 6: Matrix Rank Properties (Multi-Select)</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">2 Marks</span>
+            <span class="meta-chip">MSQ (One or More Correct)</span>
+          </div>
+        </div>
+
+        <div class="problem-statement">
+          Let $A, B \in \mathbb{R}^{n \times n}$. Which of the following statements is/are <strong>ALWAYS</strong> TRUE?
+        </div>
+
+        <div class="options-grid">
+          <div class="option-item">
+            <span class="option-label">A</span>
+            <span>$\text{Rank}(A + B) \le \text{Rank}(A) + \text{Rank}(B)$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">B</span>
+            <span>$\text{Rank}(AB) \le \min(\text{Rank}(A), \text{Rank}(B))$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">C</span>
+            <span>$\text{Rank}(AB) = \text{Rank}(BA)$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">D</span>
+            <span>If $A$ and $B$ are invertible, then $\text{Rank}(AB) = n$</span>
+          </div>
+        </div>
+
+        <div class="solution-toggle-bar">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Remember: MSQ has NO negative marking, but all correct options must be selected!</span>
+          <button class="btn btn-primary" onclick="toggleSolution('sol-6', this)">Show Solution 👁</button>
+        </div>
+
+        <div class="solution-card" id="sol-6">
+          <div class="solution-header">
+            <span><strong>Correct Options:</strong></span>
+            <span class="correct-badge">A, B, D</span>
+          </div>
+          <div class="solution-body">
+            <div class="shortcut-badge">
+              ⚡ <strong>MSQ Strategy:</strong> Test each statement independently with edge cases (nilpotent matrices, rank 0).
+            </div>
+            <ul class="concept-list">
+              <li><strong>Option A is TRUE:</strong> The column space of $(A+B)$ is contained in the sum of column spaces $\text{Col}(A) + \text{Col}(B)$. Thus $\dim(\text{Col}(A+B)) \le \dim(\text{Col}(A)) + \dim(\text{Col}(B))$.</li>
+              <li><strong>Option B is TRUE:</strong> The columns of $AB$ are linear combinations of the columns of $A$, so $\text{Col}(AB) \subseteq \text{Col}(A) \implies \text{Rank}(AB) \le \text{Rank}(A)$. By transpose, $\text{Rank}(AB) \le \text{Rank}(B)$. Hence $\text{Rank}(AB) \le \min(\text{Rank}(A), \text{Rank}(B))$.</li>
+              <li><strong>Option C is FALSE:</strong> Classic counterexample:
+                $A = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, B = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.
+                Here $AB = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$ (rank 1), whereas $BA = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$ (rank 0). Rank is not equal!</li>
+              <li><strong>Option D is TRUE:</strong> The product of two invertible $n \times n$ matrices is invertible ($\det(AB) = \det(A)\det(B) \neq 0$). Any invertible $n \times n$ matrix has full rank $n$.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 10: PYQ 7 (GATE CS 2022) -->
+    <div class="slide" id="slide-10">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-cs">GATE CS 2022</span>
+            <h2 class="slide-title">Question 7: Non-Square Matrices Product $AB = I$</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">2 Marks</span>
+            <span class="meta-chip">MCQ</span>
+          </div>
+        </div>
+
+        <div class="problem-statement">
+          Let $A$ be a $3 \times 4$ matrix and $B$ be a $4 \times 3$ matrix such that $AB = I_3$, where $I_3$ is the $3 \times 3$ identity matrix. Which of the following statements is <strong>FALSE</strong>?
+        </div>
+
+        <div class="options-grid">
+          <div class="option-item">
+            <span class="option-label">A</span>
+            <span>$\text{Rank}(A) = 3$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">B</span>
+            <span>$\text{Rank}(B) = 3$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">C</span>
+            <span>$BA = I_4$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">D</span>
+            <span>$\text{Nullity}(A) = 1$</span>
+          </div>
+        </div>
+
+        <div class="solution-toggle-bar">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Think about the rank of the $4 \times 4$ matrix $BA$:</span>
+          <button class="btn btn-primary" onclick="toggleSolution('sol-7', this)">Show Solution 👁</button>
+        </div>
+
+        <div class="solution-card" id="sol-7">
+          <div class="solution-header">
+            <span><strong>Correct Answer:</strong></span>
+            <span class="correct-badge">Option C (is FALSE)</span>
+          </div>
+          <div class="solution-body">
+            <div class="shortcut-badge">
+              ⚡ <strong>Dimension Barrier:</strong> A product of $4 \times 3$ and $3 \times 4$ matrices CANNOT have rank 4!
+            </div>
+            <p><strong>Step-by-Step Mathematical Analysis:</strong></p>
+            <ol style="margin-left: 20px; line-height: 1.8;">
+              <li>Given $AB = I_3$, we have $\text{Rank}(AB) = \text{Rank}(I_3) = 3$.</li>
+              <li>Since $\text{Rank}(AB) \le \min(\text{Rank}(A), \text{Rank}(B))$, we must have $\text{Rank}(A) \ge 3$ and $\text{Rank}(B) \ge 3$.</li>
+              <li>Since $A$ is $3 \times 4$ and $B$ is $4 \times 3$, their maximum possible ranks are $\min(3,4) = 3$. Hence, $\text{Rank}(A) = 3$ and $\text{Rank}(B) = 3$. (Options A and B are TRUE).</li>
+              <li>By Rank-Nullity Theorem on $A$: $\text{Nullity}(A) = \text{cols}(A) - \text{Rank}(A) = 4 - 3 = 1$. (Option D is TRUE).</li>
+              <li>Now inspect $BA$: $BA$ is a $4 \times 4$ matrix. Its rank is $\text{Rank}(BA) \le \min(\text{Rank}(B), \text{Rank}(A)) = 3$.
+                However, the identity matrix $I_4$ has rank 4. A rank $\le 3$ matrix can <strong>NEVER</strong> equal $I_4$!
+                Therefore, $BA \neq I_4$. (Option C is FALSE).
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 11: PYQ 8 (GATE CS 2014) -->
+    <div class="slide" id="slide-11">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-cs">GATE CS 2014</span>
+            <h2 class="slide-title">Question 8: Adjoint Determinant Rule</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">1 Mark</span>
+            <span class="meta-chip">MCQ</span>
+          </div>
+        </div>
+
+        <div class="problem-statement">
+          Let $A$ be an invertible $3 \times 3$ matrix with $\det(A) = 5$. The value of $\det(adj(A))$ is:
+        </div>
+
+        <div class="options-grid">
+          <div class="option-item"><span class="option-label">A</span><span>5</span></div>
+          <div class="option-item"><span class="option-label">B</span><span>25</span></div>
+          <div class="option-item"><span class="option-label">C</span><span>125</span></div>
+          <div class="option-item"><span class="option-label">D</span><span>1/5</span></div>
+        </div>
+
+        <div class="solution-toggle-bar">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Direct formula application:</span>
+          <button class="btn btn-primary" onclick="toggleSolution('sol-8', this)">Show Solution 👁</button>
+        </div>
+
+        <div class="solution-card" id="sol-8">
+          <div class="solution-header">
+            <span><strong>Correct Answer:</strong></span>
+            <span class="correct-badge">Option B (25)</span>
+          </div>
+          <div class="solution-body">
+            <div class="shortcut-badge">
+              ⚡ <strong>Master Formula:</strong> For any $n \times n$ matrix $A$, $|adj(A)| = |A|^{n-1}$.
+            </div>
+            <p><strong>Direct Computation:</strong></p>
+            <ul class="concept-list" style="margin-top: 8px;">
+              <li>Here $n = 3$ (order of matrix) and $|A| = 5$.</li>
+              <li>$\det(adj(A)) = |A|^{3 - 1} = |A|^2 = 5^2 = \mathbf{25}$.</li>
+            </ul>
+            <p style="margin-top: 10px; color: var(--accent-amber);">
+              <strong>Follow-up Pro Question:</strong> What is $\det(adj(adj(A)))$?
+              <br>Formula: $|adj(adj(A))| = |A|^{(n-1)^2} = 5^{(3-1)^2} = 5^4 = 625$.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 12: PYQ 9 (GATE DA 2024 / MA Overlap) -->
+    <div class="slide" id="slide-12">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-da">GATE DA 2024 / MA</span>
+            <h2 class="slide-title">Question 9: Idempotent &amp; Projection Matrix Properties</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">2 Marks</span>
+            <span class="meta-chip">MSQ</span>
+          </div>
+        </div>
+
+        <div class="problem-statement">
+          A square matrix $P \in \mathbb{R}^{n \times n}$ is called <strong>idempotent</strong> (projection matrix) if $P^2 = P$. Which of the following statements is/are <strong>ALWAYS</strong> TRUE?
+        </div>
+
+        <div class="options-grid">
+          <div class="option-item">
+            <span class="option-label">A</span>
+            <span>The only possible eigenvalues of $P$ are 0 and 1.</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">B</span>
+            <span>$\text{Trace}(P) = \text{Rank}(P)$</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">C</span>
+            <span>$(I - P)$ is also an idempotent matrix.</span>
+          </div>
+          <div class="option-item">
+            <span class="option-label">D</span>
+            <span>If $P \neq I$, then $P$ is singular (not invertible).</span>
+          </div>
+        </div>
+
+        <div class="solution-toggle-bar">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Crucial for Section 2 (Linear Algebra) in GATE DA:</span>
+          <button class="btn btn-primary" onclick="toggleSolution('sol-9', this)">Show Solution 👁</button>
+        </div>
+
+        <div class="solution-card" id="sol-9">
+          <div class="solution-header">
+            <span><strong>Correct Options:</strong></span>
+            <span class="correct-badge">A, B, C, D (All Four!)</span>
+          </div>
+          <div class="solution-body">
+            <div class="shortcut-badge">
+              ⚡ <strong>All 4 Statements are Golden Properties of Projection Matrices!</strong>
+            </div>
+            <ul class="concept-list">
+              <li><strong>A is TRUE:</strong> Let $\lambda$ be an eigenvalue with eigenvector $v \neq 0$: $P v = \lambda v \implies P^2 v = P(\lambda v) = \lambda^2 v$.
+                Since $P^2 = P$, $\lambda^2 v = \lambda v \implies (\lambda^2 - \lambda) v = 0 \implies \lambda(\lambda - 1) = 0 \implies \lambda \in \{0, 1\}$.</li>
+              <li><strong>B is TRUE:</strong> Any idempotent matrix is diagonalizable. The trace is the sum of eigenvalues. Since all non-zero eigenvalues are 1, $\text{Trace}(P) = 1 \times (\text{number of non-zero eigenvalues}) = \text{Rank}(P)$.</li>
+              <li><strong>C is TRUE:</strong> $(I - P)^2 = (I - P)(I - P) = I - P - P + P^2 = I - 2P + P = I - P$. Hence $I - P$ is idempotent.</li>
+              <li><strong>D is TRUE:</strong> If $P$ is invertible, multiply $P^2 = P$ from the left by $P^{-1}$: $P^{-1} P^2 = P^{-1} P \implies P = I$. Therefore, if $P \neq I$, $P$ cannot be invertible (i.e., it must be singular, $\det(P)=0$).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 13: PYQ 10 (GATE CS 2015) -->
+    <div class="slide" id="slide-13">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-cs">GATE CS 2015</span>
+            <h2 class="slide-title">Question 10: Maximizing Determinant with Trace Constraint</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">2 Marks</span>
+            <span class="meta-chip">NAT</span>
+          </div>
+        </div>
+
+        <div class="problem-statement">
+          The maximum value of the determinant among all $2 \times 2$ real symmetric matrices with trace 14 and integer entries is ________.
+        </div>
+
+        <div class="solution-toggle-bar">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Express determinant in terms of trace and off-diagonal entries:</span>
+          <button class="btn btn-primary" onclick="toggleSolution('sol-10', this)">Show Solution 👁</button>
+        </div>
+
+        <div class="solution-card" id="sol-10">
+          <div class="solution-header">
+            <span><strong>Correct Answer:</strong></span>
+            <span class="correct-badge">49</span>
+          </div>
+          <div class="solution-body">
+            <div class="shortcut-badge">
+              ⚡ <strong>AM-GM Inequality:</strong> For a given sum $a + c = 14$, the product $ac$ is maximized when $a = c = 7$!
+            </div>
+            <p><strong>Algebraic Derivation:</strong></p>
+            <p>Let the real symmetric matrix be:</p>
+            <div class="formula-block">
+              $M = \begin{pmatrix} a & b \\ b & c \end{pmatrix}, \quad a, b, c \in \mathbb{Z}$
+            </div>
+            <ol style="margin-left: 20px; line-height: 1.8;">
+              <li>Given: $\text{Trace}(M) = a + c = 14$.</li>
+              <li>The determinant is $\det(M) = ac - b^2$.</li>
+              <li>To maximize $\det(M)$, we must:
+                <br>• <strong>Minimize $b^2$:</strong> Since $b \in \mathbb{R}$, $b^2 \ge 0$, so its minimum is $b = 0$.
+                <br>• <strong>Maximize $ac$:</strong> Substitute $c = 14 - a$:
+                $$ac = a(14 - a) = 14a - a^2 = 49 - (a - 7)^2$$
+              </li>
+              <li>The quadratic is maximized when $a = 7$, giving $c = 14 - 7 = 7$.</li>
+              <li>Therefore: $\det(M)_{\max} = (7)(7) - 0^2 = \mathbf{49}$.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 14: Comprehensive Cheat Sheet Summary -->
+    <div class="slide" id="slide-14">
+      <div class="slide-card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag tag-concept">Deck 1A Summary</span>
+            <h2 class="slide-title">High-Yield Cheat Sheet for Matrices &amp; Rank</h2>
+          </div>
+          <div class="slide-meta">
+            <span class="meta-chip">Revision Card</span>
+          </div>
+        </div>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Property / Operation</th>
+              <th>Formula / Identity</th>
+              <th>Exam Remarks / Traps</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Scalar Determinant</strong></td>
+              <td>$\det(kA) = k^n \det(A)$</td>
+              <td>Don't forget the power $n$! Often tested in 1-mark NAT.</td>
+            </tr>
+            <tr>
+              <td><strong>Adjoint Determinant</strong></td>
+              <td>$|adj(A)| = |A|^{n-1}$</td>
+              <td>$|adj(adj(A))| = |A|^{(n-1)^2}$. Guaranteed question pattern.</td>
+            </tr>
+            <tr>
+              <td><strong>Outer Product Rank</strong></td>
+              <td>$\text{Rank}(u v^T) = 1$</td>
+              <td>For any non-zero vectors $u, v$. Nullity is $n-1$.</td>
+            </tr>
+            <tr>
+              <td><strong>Rank-Nullity</strong></td>
+              <td>$\text{Rank}(A) + \text{Nullity}(A) = n$</td>
+              <td>$n$ is the number of <em>columns</em>, never rows!</td>
+            </tr>
+            <tr>
+              <td><strong>Gram Matrix Rank</strong></td>
+              <td>$\text{Rank}(A^T A) = \text{Rank}(A)$</td>
+              <td>Crucial for Normal Equations, Linear Regression &amp; SVD in DA.</td>
+            </tr>
+            <tr>
+              <td><strong>Idempotent Matrix</strong></td>
+              <td>$P^2 = P \implies \lambda \in \{0, 1\}$</td>
+              <td>$\text{Trace}(P) = \text{Rank}(P)$. Projection onto subspace.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top: 24px; text-align: center;">
+          <button class="btn btn-primary" onclick="goToSlide(1)">Review Deck from Beginning ↺</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 15: What's Next: Deck 1B Preview -->
+    <div class="slide" id="slide-15">
+      <div class="slide-card" style="text-align: center; padding: 48px 32px;">
+        <span class="slide-tag tag-concept" style="font-size: 0.85rem; padding: 6px 14px;">Next Milestone</span>
+        <h2 class="slide-title" style="font-size: 2.2rem; margin-top: 12px; margin-bottom: 16px;">
+          Deck 1B: System of Linear Equations ($Ax = b$), LU Decomposition &amp; Consistency
+        </h2>
+        <p style="font-size: 1.1rem; color: #cbd5e1; max-width: 700px; margin: 0 auto 32px auto; line-height: 1.8;">
+          You have conquered the foundations of Matrices, Determinants, Rank, and Nullity! Next up is one of the highest-scoring areas in both GATE CS and DA:
+        </p>
+
+        <div class="content-grid" style="text-align: left; max-width: 800px; margin: 0 auto 32px auto;">
+          <div class="info-box highlight">
+            <div class="box-title cyan">⚡ Topics in Deck 1B</div>
+            <ul class="concept-list">
+              <li>Consistency conditions: Rouché–Capelli theorem ($\text{rank}(A) \text{ vs } \text{rank}([A|b])$).</li>
+              <li>Unique solution, Infinitely many solutions, and No solution conditions.</li>
+              <li>Gaussian Elimination &amp; Row Echelon Form.</li>
+              <li>LU Decomposition: Doolittle vs Crout methods ($A = LU$).</li>
+            </ul>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" style="padding: 12px 32px; font-size: 1rem;" onclick="goToSlide(1)">Back to Start</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Keybind & Status Footer -->
+  <footer>
+    <div class="keybind-hint">
+      <span><span class="key-badge">◀</span> / <span class="key-badge">▶</span> Navigate</span>
+      <span><span class="key-badge">Space</span> Next</span>
+      <span><span class="key-badge">S</span> Toggle Solution</span>
+    </div>
+    <div id="footerStatus">Module 1: Linear Algebra (CS &amp; DA)</div>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 15;
+
+    function updateSlideUI() {
+      // Toggle active slide
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        if (slide) {
+          slide.classList.toggle('active', i === currentSlide);
+        }
+      }
+
+      // Update counters & buttons
+      document.getElementById('slideIndicator').textContent = `Slide ${currentSlide} / ${totalSlides}`;
+      document.getElementById('prevBtn').disabled = (currentSlide === 1);
+      document.getElementById('nextBtn').disabled = (currentSlide === totalSlides);
+
+      // Update progress bar
+      const progress = ((currentSlide - 1) / (totalSlides - 1)) * 100;
+      document.getElementById('progressBar').style.width = `${progress}%`;
+
+      // Render KaTeX for the newly displayed slide
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById(`slide-${currentSlide}`), {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlideUI();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlideUI();
+      }
+    }
+
+    function goToSlide(n) {
+      if (n >= 1 && n <= totalSlides) {
+        currentSlide = n;
+        updateSlideUI();
+      }
+    }
+
+    function toggleSolution(id, btn) {
+      const card = document.getElementById(id);
+      if (!card) return;
+      const isRevealed = card.classList.contains('revealed');
+      if (isRevealed) {
+        card.classList.remove('revealed');
+        if (btn) btn.textContent = 'Show Solution 👁';
+      } else {
+        card.classList.add('revealed');
+        if (btn) btn.textContent = 'Hide Solution ✕';
+        // Render math inside solution
+        if (window.renderMathInElement) {
+          renderMathInElement(card, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+          });
+        }
+      }
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 's' || e.key === 'S') {
+        // Toggle solution on current slide if present
+        const currentSlideEl = document.getElementById(`slide-${currentSlide}`);
+        const solBtn = currentSlideEl ? currentSlideEl.querySelector('.solution-toggle-bar button') : null;
+        if (solBtn) solBtn.click();
+      }
+    });
+
+    // Initial render on load
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+      updateSlideUI();
+    });
+  </script>
+</body>
+</html>

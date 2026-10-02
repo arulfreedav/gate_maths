@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GATE 2027 Complete Mathematics Master Handbook (CS &amp; DA - All 4 Modules)</title>
+  
+  <!-- KaTeX for High Quality Math Formulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #0f172a;
+      --bg-card: #1e293b;
+      --accent-blue: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #c084fc;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --code-bg: #020617;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    /* Top Sticky Action Bar */
+    header.top-bar {
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-all {
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      color: #04101e;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .action-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-pdf {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-pdf:hover {
+      background: linear-gradient(135deg, #f87171, #ef4444);
+      transform: translateY(-1px);
+    }
+
+    .btn-nav {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-nav:hover { background: var(--border-color); color: white; }
+
+    /* Main Container */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 32px 100px 32px;
+    }
+
+    /* Cover Page / Banner */
+    .handbook-hero {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 36px 40px;
+      margin-bottom: 36px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .handbook-hero::after {
+      content: "";
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    h1.doc-title {
+      font-size: 2.35rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .doc-subtitle {
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .hero-meta-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+
+    .hero-meta-card .label { font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.5px; }
+    .hero-meta-card .val { font-size: 0.92rem; color: #f1f5f9; font-weight: 600; margin-top: 2px; }
+
+    /* Module Navigation Anchor Pill Bar */
+    .module-nav-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+      background: var(--bg-secondary);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .module-nav-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .module-nav-btn:hover {
+      background: var(--accent-blue);
+      color: #04101e;
+      border-color: var(--accent-blue);
+    }
+
+    /* Headings */
+    h2.part-heading {
+      font-size: 1.85rem;
+      font-weight: 800;
+      margin-top: 56px;
+      margin-bottom: 16px;
+      padding: 14px 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      page-break-before: always;
+    }
+
+    .part-1 { background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(15, 23, 42, 0.9)); border-left: 6px solid var(--accent-blue); color: #38bdf8; }
+    .part-2 { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(15, 23, 42, 0.9)); border-left: 6px solid var(--accent-green); color: #10b981; }
+    .part-3 { background: linear-gradient(135deg, rgba(192, 132, 252, 0.15), rgba(15, 23, 42, 0.9)); border-left: 6px solid var(--accent-purple); color: #c084fc; }
+    .part-4 { background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(15, 23, 42, 0.9)); border-left: 6px solid var(--accent-amber); color: #f59e0b; }
+    .part-5 { background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(15, 23, 42, 0.9)); border-left: 6px solid var(--accent-rose); color: #f43f5e; }
+
+    h3.section-heading {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-top: 36px;
+      margin-bottom: 16px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h4.topic-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #93c5fd;
+      margin-top: 22px;
+      margin-bottom: 10px;
+    }
+
+    p { margin-bottom: 12px; color: #cbd5e1; font-size: 0.96rem; line-height: 1.7; }
+    ul, ol { margin-left: 22px; margin-bottom: 14px; color: #cbd5e1; }
+    li { margin-bottom: 6px; line-height: 1.6; }
+
+    /* Formula & Concept Cards */
+    .formula-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 16px 0;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+      page-break-inside: avoid;
+    }
+
+    .formula-title {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .formula-display {
+      background: var(--code-bg);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 10px 0;
+      text-align: center;
+      color: #38bdf8;
+      font-size: 1.05rem;
+      overflow-x: auto;
+    }
+
+    /* Decision Box: When to use */
+    .when-to-use-box {
+      background: rgba(16, 185, 129, 0.07);
+      border-left: 4px solid var(--accent-green);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .when-to-use-box strong { color: #34d399; }
+
+    /* Trap Box: GATE traps */
+    .trap-box {
+      background: rgba(244, 63, 94, 0.07);
+      border-left: 4px solid var(--accent-rose);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .trap-box strong { color: #fb7185; }
+
+    /* Shortcut Box */
+    .shortcut-box {
+      background: rgba(245, 158, 11, 0.07);
+      border-left: 4px solid var(--accent-amber);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .shortcut-box strong { color: #fbbf24; }
+
+    /* Tables */
+    table.guide-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 0.9rem;
+      page-break-inside: avoid;
+    }
+
+    table.guide-table th, table.guide-table td {
+      border: 1px solid var(--border-color);
+      padding: 9px 12px;
+      text-align: left;
+    }
+
+    table.guide-table th {
+      background: var(--bg-card);
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    table.guide-table tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .tag-badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
+    .tag-cs { background: #3b82f6; color: white; }
+    .tag-da { background: #8b5cf6; color: white; }
+    .tag-both { background: #10b981; color: white; }
+
+    /* Print Specific Media Rules for Perfect A4 Output */
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 9.5pt;
+        line-height: 1.45;
+      }
+
+      header.top-bar, .module-nav-bar, .btn-pdf, .btn-nav {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .handbook-hero {
+        background: #f8fafc !important;
+        border: 2px solid #cbd5e1 !important;
+        color: #0f172a !important;
+        box-shadow: none !important;
+        page-break-after: always;
+        padding: 24pt !important;
+      }
+
+      h1.doc-title {
+        color: #0f172a !important;
+        -webkit-text-fill-color: #0f172a !important;
+        font-size: 24pt !important;
+      }
+
+      .doc-subtitle { color: #334155 !important; }
+      .hero-meta-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; }
+      .hero-meta-card .val { color: #0f172a !important; }
+
+      h2.part-heading {
+        page-break-before: always;
+        color: #0f172a !important;
+        background: #f1f5f9 !important;
+        border: 1px solid #cbd5e1 !important;
+        border-left: 6pt solid #0284c7 !important;
+        font-size: 15pt !important;
+        padding: 8pt 12pt !important;
+        margin-top: 15pt !important;
+      }
+
+      h3.section-heading {
+        color: #0369a1 !important;
+        border-bottom: 1.5pt solid #cbd5e1 !important;
+        font-size: 12pt !important;
+        margin-top: 14pt !important;
+        page-break-after: avoid;
+      }
+
+      h4.topic-heading {
+        color: #0f172a !important;
+        font-size: 10.5pt !important;
+        page-break-after: avoid;
+      }
+
+      p, li { color: #1e293b !important; }
+
+      .formula-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid !important;
+        padding: 10pt !important;
+        margin: 8pt 0 !important;
+      }
+
+      .formula-title { color: #0f172a !important; font-size: 10pt !important; }
+
+      .formula-display {
+        background: #f8fafc !important;
+        border: 1px solid #94a3b8 !important;
+        color: #0f172a !important;
+        padding: 6pt 10pt !important;
+      }
+
+      .when-to-use-box {
+        background: #f0fdf4 !important;
+        border-left: 3.5pt solid #16a34a !important;
+        color: #14532d !important;
+        page-break-inside: avoid !important;
+      }
+      .when-to-use-box strong { color: #15803d !important; }
+
+      .trap-box {
+        background: #fff1f2 !important;
+        border-left: 3.5pt solid #e11d48 !important;
+        color: #881337 !important;
+        page-break-inside: avoid !important;
+      }
+      .trap-box strong { color: #be123c !important; }
+
+      .shortcut-box {
+        background: #fffbeb !important;
+        border-left: 3.5pt solid #d97706 !important;
+        color: #78350f !important;
+        page-break-inside: avoid !important;
+      }
+      .shortcut-box strong { color: #b45309 !important; }
+
+      table.guide-table {
+        page-break-inside: avoid !important;
+        font-size: 8.5pt !important;
+      }
+
+      table.guide-table th {
+        background: #e2e8f0 !important;
+        color: #0f172a !important;
+      }
+
+      table.guide-table td {
+        border-color: #cbd5e1 !important;
+        color: #0f172a !important;
+      }
+
+      @page {
+        size: A4;
+        margin: 14mm 12mm 14mm 12mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation & Print Controls -->
+  <header class="top-bar">
+    <div class="brand-title">
+      <span>📚 GATE 2027 Mathematics Master Handbook</span>
+      <span class="badge-all">Complete All 4 Modules</span>
+    </div>
+    <div class="action-controls">
+      <a href="index.html" class="btn-nav">🏠 Master Dashboard</a>
+      <button class="btn-pdf" onclick="window.print()">
+        <span>🖨️ Save All Modules as Single PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Document Cover & Meta Hero -->
+    <div class="handbook-hero">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+        <span class="badge-all" style="font-size:0.8rem; padding:4px 12px;">GATE 2027 Official Syllabus Edition</span>
+        <span style="color:var(--text-muted); font-size:0.85rem; font-weight:600;">CS Section 1 &amp; DA Sections 1, 2, 3</span>
+      </div>
+      <h1 class="doc-title">Complete GATE Mathematics Master Handbook</h1>
+      <p class="doc-subtitle">
+        Exhaustive Theory, Formulas, Decision Rules ("When-To-Use"), Trap Alerts, and 10-Second Inspection Shortcuts for all 4 Mathematical Foundations. Single consolidated reference document for CS &amp; DA aspirants.
+      </p>
+
+      <div class="hero-meta-grid">
+        <div class="hero-meta-card">
+          <div class="label">Module 1 (CS &amp; DA)</div>
+          <div class="val">Linear Algebra</div>
+        </div>
+        <div class="hero-meta-card">
+          <div class="label">Module 2 (CS &amp; DA)</div>
+          <div class="val">Probability &amp; Statistics</div>
+        </div>
+        <div class="hero-meta-card">
+          <div class="label">Module 3 (CS Core &amp; DA)</div>
+          <div class="val">Discrete Mathematics</div>
+        </div>
+        <div class="hero-meta-card">
+          <div class="label">Module 4 (CS &amp; DA)</div>
+          <div class="val">Calculus &amp; Optimization</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Anchor Pill Bar -->
+    <div class="module-nav-bar">
+      <span style="font-size:0.8rem; color:var(--text-muted); font-weight:700; align-self:center; margin-right:4px;">JUMP TO:</span>
+      <a href="#decision-matrix" class="module-nav-btn">🧭 Decision Matrix</a>
+      <a href="#part-1-linear-algebra" class="module-nav-btn">📐 Part 1: Linear Algebra</a>
+      <a href="#part-2-prob-stats" class="module-nav-btn">🎲 Part 2: Prob &amp; Stats</a>
+      <a href="#part-3-discrete-math" class="module-nav-btn">🧩 Part 3: Discrete Math</a>
+      <a href="#part-4-calculus-opt" class="module-nav-btn">📈 Part 4: Calculus &amp; Opt</a>
+      <a href="#part-5-master-traps" class="module-nav-btn">⚠️ Part 5: Master Traps Directory</a>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- MASTER DECISION MATRIX -->
+    <!-- =================================================================== -->
+    <div id="decision-matrix">
+      <h3 class="section-heading">🧭 Master When-To-Use Quick Decision Matrix (All Modules)</h3>
+      <p>Use this lookup table in the exam hall to immediately match the question's text to the exact theorem and formula:</p>
+
+      <table class="guide-table">
+        <thead>
+          <tr>
+            <th style="width:25%;">If the GATE Question Mentions...</th>
+            <th style="width:30%;">Immediate Concept / Trigger</th>
+            <th style="width:45%;">Exact Formula / Action Rule</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>"System $Ax=b$ has infinitely many solutions"</strong></td>
+            <td>Rouché-Capelli Theorem</td>
+            <td>$\text{Rank}(A) = \text{Rank}([A|b]) = r < n$. Free variables = $n - r > 0$. $\det(A) = 0$ if square.</td>
+          </tr>
+          <tr>
+            <td><strong>"Sum / Product of eigenvalues"</strong></td>
+            <td>Trace and Determinant properties</td>
+            <td>$\sum \lambda_i = \text{Tr}(A)$ and $\prod \lambda_i = \det(A)$. Never compute the characteristic polynomial unless necessary!</td>
+          </tr>
+          <tr>
+            <td><strong>"Best rank-$k$ approximation / Spectral Norm"</strong></td>
+            <td>Singular Value Decomposition (SVD)</td>
+            <td>$\|A\|_2 = \sigma_1 = \sqrt{\lambda_{\max}(A^T A)}$. Best rank-$k$: $A_k = \sum_{i=1}^k \sigma_i u_i v_i^T$.</td>
+          </tr>
+          <tr>
+            <td><strong>"Probability of disease given positive test"</strong></td>
+            <td>Bayes' Rule with Total Probability</td>
+            <td>$P(D|+)=\frac{P(+|D)P(D)}{P(+|D)P(D) + P(+|D^c)P(D^c)}$. Always set up a 2x2 tree or contingency table.</td>
+          </tr>
+          <tr>
+            <td><strong>"Average rate $\lambda$ in continuous time / Memoryless"</strong></td>
+            <td>Poisson (counts) / Exponential (waiting)</td>
+            <td>Counts in interval $t$: $\text{Poisson}(\lambda t)$. Waiting time: $f(t)=\lambda e^{-\lambda t}$, $P(T > s+t \mid T > s) = P(T > t)$.</td>
+          </tr>
+          <tr>
+            <td><strong>"Bound on probability knowing only Mean and/or Variance"</strong></td>
+            <td>Markov / Chebyshev Inequalities</td>
+            <td>$P(X \ge a) \le \frac{E[X]}{a}$ ($X \ge 0$). $|X-\mu| \ge k\sigma \le \frac{1}{k^2}$. Never use Normal distribution unless explicitly stated!</td>
+          </tr>
+          <tr>
+            <td><strong>"Is this relation a Partial Order / Lattice?"</strong></td>
+            <td>Reflexive, Antisymmetric, Transitive</td>
+            <td>POSET if Reflexive + Antisymmetric + Transitive. Lattice if every pair $\{x, y\}$ has Unique LUB ($\vee$) and Unique GLB ($\wedge$).</td>
+          </tr>
+          <tr>
+            <td><strong>"Number of spanning trees in a complete graph $K_n$"</strong></td>
+            <td>Cayley's Tree Formula</td>
+            <td>$n^{n-2}$ spanning trees. In complete bipartite $K_{m,n}$: $m^{n-1} n^{m-1}$.</td>
+          </tr>
+          <tr>
+            <td><strong>"Max planar graph edges / Graph colorability"</strong></td>
+            <td>Euler's Formula &amp; Planar Bounds</td>
+            <td>$V - E + R = 2$. For connected planar graph without triangles ($C_3$ free): $E \le 2V - 4$. If triangles allowed: $E \le 3V - 6$.</td>
+          </tr>
+          <tr>
+            <td><strong>"Classification of stationary point in 2 variables"</strong></td>
+            <td>Hessian Matrix Determinant &amp; Trace</td>
+            <td>At $\nabla f = 0$, evaluate $D = f_{xx}f_{yy} - (f_{xy})^2$. If $D > 0, f_{xx} > 0 \implies \text{Min}$. If $D > 0, f_{xx} < 0 \implies \text{Max}$. If $D < 0 \implies \text{Saddle}$.</td>
+          </tr>
+          <tr>
+            <td><strong>"Constrained optimization with inequalities $g(x) \le 0$"</strong></td>
+            <td>KKT Conditions</td>
+            <td>Stationarity ($\nabla f + \sum \mu_i \nabla g_i = 0$), Primal feasibility ($g_i \le 0$), Dual feasibility ($\mu_i \ge 0$), Complementary Slackness ($\mu_i g_i = 0$).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PART 1: LINEAR ALGEBRA -->
+    <!-- =================================================================== -->
+    <div id="part-1-linear-algebra">
+      <h2 class="part-heading part-1">
+        <span>PART 1: LINEAR ALGEBRA</span>
+        <span style="font-size:0.9rem; font-weight:600; opacity:0.85;">GATE CS (Sec 1) &amp; DA (Sec 2)</span>
+      </h2>
+
+      <!-- TOPIC 1.1 -->
+      <h3 class="section-heading">1.1 Matrices, Determinants, Inverses &amp; Adjoints</h3>
+      
+      <div class="formula-card">
+        <div class="formula-title">Determinant Properties &amp; Special Matrix Identities</div>
+        <p>Let $A, B$ be $n \times n$ matrices and $c$ be a scalar:</p>
+        <div class="formula-display">
+          $$\det(cA) = c^n \det(A), \quad \det(AB) = \det(A)\det(B), \quad \det(A^{-1}) = \frac{1}{\det(A)}$$
+          $$\det(\text{adj}(A)) = (\det(A))^{n-1}, \quad \text{adj}(\text{adj}(A)) = (\det(A))^{n-2} A$$
+          $$\det(\text{adj}(\text{adj}(A))) = (\det(A))^{(n-1)^2}$$
+        </div>
+        <div class="when-to-use-box">
+          <strong>WHEN TO USE:</strong> Whenever GATE asks for the determinant of a scaled matrix, adjoint matrix, or compound expression like $|2 \text{adj}(3A)|$.
+          <ul>
+            <li>Step 1: Pull out constants using $c^n$.</li>
+            <li>Step 2: Replace $\det(\text{adj}(M))$ with $|M|^{n-1}$.</li>
+            <li>Step 3: Combine powers of $|A|$.</li>
+          </ul>
+        </div>
+        <div class="trap-box">
+          <strong>GATE TRAP:</strong> Students consistently write $\det(cA) = c \det(A)$. The scalar $c$ factors out of <em>every row</em>, yielding $c^n$! Also, for skew-symmetric matrices $A^T = -A$: if $n$ is odd, $\det(A) = 0$ always. If $n$ is even, $\det(A)$ is a perfect square.
+        </div>
+      </div>
+
+      <!-- TOPIC 1.2 -->
+      <h3 class="section-heading">1.2 Vector Spaces, Subspaces, Basis &amp; Dimension</h3>
+      
+      <div class="formula-card">
+        <div class="formula-title">Subspace Criteria &amp; Dimension Rules</div>
+        <p>A subset $W \subseteq V$ is a subspace if and only if:</p>
+        <div class="formula-display">
+          $$\mathbf{0} \in W \quad \text{and} \quad \forall u, v \in W, \; \alpha, \beta \in \mathbb{R} \implies \alpha u + \beta v \in W$$
+        </div>
+        <p>For two subspaces $W_1, W_2 \subseteq V$:</p>
+        <div class="formula-display">
+          $$\dim(W_1 + W_2) = \dim(W_1) + \dim(W_2) - \dim(W_1 \cap W_2)$$
+        </div>
+        <div class="when-to-use-box">
+          <strong>WHEN TO USE:</strong>
+          <ul>
+            <li>To check if a set is a subspace: check if setting all variables to $0$ satisfies the equation. If $0 \notin W$, <em>immediately reject</em>. Also, reject any equation containing affine constants ($x_1 + x_2 = 1$), products ($x_1 x_2 = 0$), or inequalities ($x_1 \ge 0$).</li>
+            <li>To find dimension of symmetric matrices: $\frac{n(n+1)}{2}$.</li>
+            <li>To find dimension of skew-symmetric matrices: $\frac{n(n-1)}{2}$.</li>
+            <li>To find dimension of trace-zero matrices: $n^2 - 1$.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TOPIC 1.3 -->
+      <h3 class="section-heading">1.3 Rank, Nullity &amp; The 4 Fundamental Subspaces</h3>
+      
+      <div class="formula-card">
+        <div class="formula-title">Rank-Nullity Theorem &amp; Orthogonal Complements</div>
+        <p>For any matrix $A \in \mathbb{R}^{m \times n}$ ($m$ rows, $n$ columns):</p>
+        <div class="formula-display">
+          $$\text{Rank}(A) + \text{Nullity}(A) = n \quad (\text{number of columns})$$
+          $$\text{Col}(A) \perp \text{Null}(A^T) \quad \text{in } \mathbb{R}^m, \qquad \text{Row}(A) \perp \text{Null}(A) \quad \text{in } \mathbb{R}^n$$
+          $$\dim(\text{Col}(A)) = \dim(\text{Row}(A)) = \text{Rank}(A) = r$$
+          $$\dim(\text{Null}(A)) = n - r, \qquad \dim(\text{Null}(A^T)) = m - r$$
+        </div>
+        <div class="when-to-use-box">
+          <strong>WHEN TO USE:</strong> Whenever asked for "dimension of solution space of $Ax=0$" (this is simply $\text{Nullity}(A) = n - r$), or when asked whether a vector is orthogonal to the row space (check if $Ax = 0$).
+        </div>
+        <div class="shortcut-box">
+          <strong>OUTER PRODUCT SHORTCUT:</strong> If $u \in \mathbb{R}^{m \times 1}$ and $v \in \mathbb{R}^{n \times 1}$ are non-zero vectors, the matrix $A = u v^T$ ALWAYS has $\text{Rank}(A) = 1$. Its non-zero eigenvalue is $\lambda = v^T u = \text{Tr}(A)$, and all other $n-1$ eigenvalues are $0$.
+        </div>
+      </div>
+
+      <!-- TOPIC 1.4 -->
+      <h3 class="section-heading">1.4 Systems of Linear Equations ($Ax = b$)</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Rouché-Capelli Theorem &amp; Consistency Classification</div>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Condition</th>
+              <th>System Type</th>
+              <th>Solution Nature</th>
+              <th>Degrees of Freedom</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$\text{Rank}(A) \neq \text{Rank}([A|b])$</td>
+              <td>Inconsistent</td>
+              <td><strong>No Solution</strong></td>
+              <td>None</td>
+            </tr>
+            <tr>
+              <td>$\text{Rank}(A) = \text{Rank}([A|b]) = n$</td>
+              <td>Consistent</td>
+              <td><strong>Unique Solution</strong></td>
+              <td>$0$ free variables</td>
+            </tr>
+            <tr>
+              <td>$\text{Rank}(A) = \text{Rank}([A|b]) = r < n$</td>
+              <td>Consistent</td>
+              <td><strong>Infinitely Many Solutions</strong></td>
+              <td>$k = n - r$ free variables</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="when-to-use-box">
+          <strong>WHEN TO USE:</strong> Parametric questions with unknowns $\lambda, \mu$ in the matrix:
+          <ul>
+            <li>Step 1: Convert $[A|b]$ to Upper Triangular / Row Echelon Form using elementary row operations.</li>
+            <li>Step 2: Inspect the bottom row $[0 \quad 0 \quad (\alpha) \;|\; (\beta)]$.
+              <ul>
+                <li>No solution: $\alpha = 0$ and $\beta \neq 0$.</li>
+                <li>Infinitely many: $\alpha = 0$ and $\beta = 0$.</li>
+                <li>Unique solution: $\alpha \neq 0$ (independent of $\beta$).</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TOPIC 1.5 -->
+      <h3 class="section-heading">1.5 Eigenvalues, Eigenvectors, Cayley-Hamilton &amp; Diagonalization</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Eigenvalue Theorems &amp; Invariants</div>
+        <p>For characteristic equation $\det(A - \lambda I) = 0$:</p>
+        <div class="formula-display">
+          $$\sum_{i=1}^n \lambda_i = \text{Trace}(A) = \sum_{i=1}^n a_{ii}, \qquad \prod_{i=1}^n \lambda_i = \det(A)$$
+          $$A \mathbf{v} = \lambda \mathbf{v} \implies A^k \mathbf{v} = \lambda^k \mathbf{v}, \quad (A + cI)\mathbf{v} = (\lambda + c)\mathbf{v}, \quad A^{-1}\mathbf{v} = \frac{1}{\lambda}\mathbf{v}$$
+        </div>
+        <div class="shortcut-box">
+          <strong>10-SECOND INSPECTION TRICK:</strong> If every row of matrix $A$ sums to a constant $S$, then $\lambda = S$ is <strong>GUARANTEED</strong> to be an eigenvalue of $A$, with corresponding eigenvector $\mathbf{v} = [1, 1, \dots, 1]^T$.
+        </div>
+        <div class="formula-title" style="margin-top:16px;">Cayley-Hamilton Theorem &amp; Diagonalizability</div>
+        <p>Every square matrix satisfies its own characteristic equation: $p(A) = O$.</p>
+        <div class="formula-display">
+          $$A \text{ is diagonalizable} \iff \text{Geometric Multiplicity}(\lambda_i) = \text{Algebraic Multiplicity}(\lambda_i) \quad \forall i$$
+          $$\text{GM}(\lambda) = \text{Nullity}(A - \lambda I) = n - \text{Rank}(A - \lambda I)$$
+        </div>
+        <div class="trap-box">
+          <strong>GATE TRAP:</strong> Having distinct eigenvalues is a <em>sufficient</em> condition for diagonalizability, NOT a <em>necessary</em> condition! The identity matrix $I$ has repeated eigenvalue $\lambda = 1$ with $\text{AM}=n, \text{GM}=n$, and is already diagonal.
+        </div>
+      </div>
+
+      <!-- TOPIC 1.6 -->
+      <h3 class="section-heading">1.6 Matrix Factorizations &amp; Decompositions (LU, Cholesky, QR, SVD)</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Decomposition Summary Table</div>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Decomposition</th>
+              <th>Form &amp; Requirements</th>
+              <th>Properties of Factors</th>
+              <th>Primary Application / Exam Trigger</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>LU Decomposition</strong></td>
+              <td>$A = LU$<br>Requires all leading principal minors $\neq 0$.</td>
+              <td>$L$: Unit lower triangular ($l_{ii}=1$).<br>$U$: Upper triangular.</td>
+              <td>Solving $Ax=b$ via forward substitution ($Ly=b$) then back substitution ($Ux=y$). $\det(A)=\prod u_{ii}$.</td>
+            </tr>
+            <tr>
+              <td><strong>Cholesky</strong></td>
+              <td>$A = L L^T$<br>Requires $A$ to be <strong>Symmetric Positive Definite (SPD)</strong>.</td>
+              <td>$L$: Lower triangular with positive diagonal elements $l_{ii} > 0$.</td>
+              <td>Half the FLOPs of LU. Check SPD via Sylvester's Criterion: all leading principal minors $> 0$.</td>
+            </tr>
+            <tr>
+              <td><strong>QR Decomposition</strong></td>
+              <td>$A = QR$<br>$A \in \mathbb{R}^{m \times n}$ with full column rank.</td>
+              <td>$Q \in \mathbb{R}^{m \times n}$: Orthogonal columns ($Q^T Q = I$).<br>$R \in \mathbb{R}^{n \times n}$: Upper triangular, invertible.</td>
+              <td>Gram-Schmidt Orthogonalization, Least Squares Solution: $\hat{x} = R^{-1} Q^T b$.</td>
+            </tr>
+            <tr>
+              <td><strong>Singular Value Decomposition (SVD)</strong></td>
+              <td>$A = U \Sigma V^T$<br>Valid for <em>ANY</em> $m \times n$ matrix!</td>
+              <td>$U \in \mathbb{R}^{m \times m}$ (eigenvectors of $AA^T$).<br>$V \in \mathbb{R}^{n \times n}$ (eigenvectors of $A^T A$).<br>$\Sigma$: diagonal singular values $\sigma_1 \ge \sigma_2 \dots \ge 0$.</td>
+              <td>$\sigma_i = \sqrt{\lambda_i(A^T A)}$. Rank = count of $\sigma_i > 0$. Low-rank approximation (Eckart-Young Theorem). Spectral norm $\|A\|_2 = \sigma_1$.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PART 2: PROBABILITY & STATISTICS -->
+    <!-- =================================================================== -->
+    <div id="part-2-prob-stats">
+      <h2 class="part-heading part-2">
+        <span>PART 2: PROBABILITY &amp; STATISTICS</span>
+        <span style="font-size:0.9rem; font-weight:600; opacity:0.85;">GATE CS (Sec 1) &amp; DA (Sec 1)</span>
+      </h2>
+
+      <!-- TOPIC 2.1 -->
+      <h3 class="section-heading">2.1 Axioms, Conditional Probability &amp; Bayes' Theorem</h3>
+      
+      <div class="formula-card">
+        <div class="formula-title">Foundational Rules of Probability</div>
+        <div class="formula-display">
+          $$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+          $$P(A \mid B) = \frac{P(A \cap B)}{P(B)} \quad (P(B) > 0)$$
+          $$P(A \cap B) = P(A \mid B) P(B) = P(B \mid A) P(A)$$
+        </div>
+        <p><strong>Total Probability Theorem &amp; Bayes' Theorem:</strong> For partition $B_1, B_2, \dots, B_k$ of sample space:</p>
+        <div class="formula-display">
+          $$P(A) = \sum_{i=1}^k P(A \mid B_i) P(B_i)$$
+          $$P(B_j \mid A) = \frac{P(A \mid B_j) P(B_j)}{\sum_{i=1}^k P(A \mid B_i) P(B_i)}$$
+        </div>
+        <div class="when-to-use-box">
+          <strong>WHEN TO USE:</strong> Any problem stating "A test is 95% accurate. Disease incidence is 1%. Find probability of disease given a positive test."
+          <ul>
+            <li>$P(D)$ is the <em>prior probability</em>.</li>
+            <li>$P(+ \mid D)$ is the <em>sensitivity</em>.</li>
+            <li>$P(+ \mid D^c)$ is the <em>false positive rate</em> ($1 - \text{specificity}$).</li>
+            <li>Denom: $P(+) = P(+ \mid D)P(D) + P(+ \mid D^c)P(D^c)$.</li>
+          </ul>
+        </div>
+        <div class="trap-box">
+          <strong>GATE TRAP ON INDEPENDENCE:</strong> $A$ and $B$ are independent $\iff P(A \cap B) = P(A)P(B)$. Mutually exclusive events with $P(A)>0, P(B)>0$ are <strong>NEVER</strong> independent because $P(A \cap B) = 0 \neq P(A)P(B)$! Pairwise independence does NOT imply mutual independence.
+        </div>
+      </div>
+
+      <!-- TOPIC 2.2 -->
+      <h3 class="section-heading">2.2 Discrete Random Variables &amp; Standard Distributions</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Discrete Distributions Cheat Sheet</div>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Distribution</th>
+              <th>Probability Mass Function (PMF) $P(X=k)$</th>
+              <th>Mean $E[X]$</th>
+              <th>Variance $\text{Var}(X)$</th>
+              <th>When to Apply in GATE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Bernoulli</strong> $(p)$</td>
+              <td>$p^k (1-p)^{1-k}, \quad k \in \{0, 1\}$</td>
+              <td>$p$</td>
+              <td>$p(1-p)$</td>
+              <td>Single binary trial (Coin flip, packet drop).</td>
+            </tr>
+            <tr>
+              <td><strong>Binomial</strong> $(n, p)$</td>
+              <td>$\binom{n}{k} p^k (1-p)^{n-k}, \quad k \in \{0, \dots, n\}$</td>
+              <td>$np$</td>
+              <td>$np(1-p)$</td>
+              <td>Number of successes in $n$ independent trials with replacement.</td>
+            </tr>
+            <tr>
+              <td><strong>Poisson</strong> $(\lambda)$</td>
+              <td>$\frac{e^{-\lambda} \lambda^k}{k!}, \quad k = 0, 1, 2, \dots$</td>
+              <td>$\lambda$</td>
+              <td>$\lambda$ (Mean = Var!)</td>
+              <td>Rare events in continuous time/space; limit of Binomial as $n \to \infty, p \to 0, np = \lambda$.</td>
+            </tr>
+            <tr>
+              <td><strong>Geometric</strong> $(p)$</td>
+              <td>$(1-p)^{k-1} p, \quad k = 1, 2, \dots$ (trial of 1st success)</td>
+              <td>$\frac{1}{p}$</td>
+              <td>$\frac{1-p}{p^2}$</td>
+              <td>Number of trials until 1st success. <strong>Memoryless:</strong> $P(X > s+t \mid X > s) = P(X > t) = (1-p)^t$.</td>
+            </tr>
+            <tr>
+              <td><strong>Hypergeometric</strong></td>
+              <td>$\frac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}$</td>
+              <td>$n \frac{K}{N}$</td>
+              <td>$n \frac{K}{N} \left(1-\frac{K}{N}\right) \frac{N-n}{N-1}$</td>
+              <td>Sampling <em>without replacement</em> from a finite population of size $N$ with $K$ successes.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TOPIC 2.3 -->
+      <h3 class="section-heading">2.3 Continuous Random Variables &amp; Distributions</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Continuous Distributions Master Summary</div>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Distribution</th>
+              <th>PDF $f(x)$ &amp; Support</th>
+              <th>CDF $F(x)$</th>
+              <th>Mean &amp; Variance</th>
+              <th>Exam Remarks &amp; Properties</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Uniform</strong> $U(a, b)$</td>
+              <td>$f(x) = \frac{1}{b-a}, \quad x \in [a, b]$</td>
+              <td>$\frac{x-a}{b-a}$</td>
+              <td>$E[X] = \frac{a+b}{2}$<br>$\text{Var}(X) = \frac{(b-a)^2}{12}$</td>
+              <td>Max entropy distribution on a bounded interval. Probability is simply length ratio: $\frac{d-c}{b-a}$.</td>
+            </tr>
+            <tr>
+              <td><strong>Exponential</strong> $(\lambda)$</td>
+              <td>$f(x) = \lambda e^{-\lambda x}, \quad x \ge 0$</td>
+              <td>$1 - e^{-\lambda x}$</td>
+              <td>$E[X] = \frac{1}{\lambda}$<br>$\text{Var}(X) = \frac{1}{\lambda^2}$</td>
+              <td>Continuous memoryless distribution: $P(X > s+t \mid X > s) = P(X > t) = e^{-\lambda t}$. Median = $\frac{\ln 2}{\lambda}$.</td>
+            </tr>
+            <tr>
+              <td><strong>Normal</strong> $\mathcal{N}(\mu, \sigma^2)$</td>
+              <td>$f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$</td>
+              <td>$\Phi\left(\frac{x-\mu}{\sigma}\right)$</td>
+              <td>$E[X] = \mu$<br>$\text{Var}(X) = \sigma^2$</td>
+              <td>$Z = \frac{X-\mu}{\sigma} \sim \mathcal{N}(0, 1)$. Empirical rule: $P(|X-\mu|\le \sigma)\approx 68.27\%$, $\le 2\sigma \approx 95.45\%$, $\le 3\sigma \approx 99.73\%$.</td>
+            </tr>
+            <tr>
+              <td><strong>Standard Normal $Z$</strong></td>
+              <td>$\phi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}$</td>
+              <td>$\Phi(z) = 1 - \Phi(-z)$</td>
+              <td>$E[Z] = 0$<br>$\text{Var}(Z) = 1$</td>
+              <td>Symmetry: $P(Z > z) = P(Z < -z) = 1 - \Phi(z)$. Odd moments are 0 ($E[Z^{2k+1}]=0$).</td>
+            </tr>
+            <tr>
+              <td><strong>Chi-Square</strong> $\chi^2(k)$</td>
+              <td>Sum of $k$ independent squared standard normals: $\sum_{i=1}^k Z_i^2$</td>
+              <td>Incomplete gamma</td>
+              <td>$E[X] = k$<br>$\text{Var}(X) = 2k$</td>
+              <td>Additive: $\chi^2(k_1) + \chi^2(k_2) = \chi^2(k_1+k_2)$. Used for variance hypothesis testing.</td>
+            </tr>
+            <tr>
+              <td><strong>Student's $t$</strong> $(k)$</td>
+              <td>$T = \frac{Z}{\sqrt{\chi^2(k) / k}}$</td>
+              <td>Symmetric bell-shaped</td>
+              <td>$E[T] = 0 \; (k>1)$<br>$\text{Var} = \frac{k}{k-2} \; (k>2)$</td>
+              <td>Heavier tails than Normal. Approaches $\mathcal{N}(0,1)$ as $k \to \infty$. Used when population $\sigma$ is unknown.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TOPIC 2.4 -->
+      <h3 class="section-heading">2.4 Joint Distributions, Covariance &amp; Expectation Algebra</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Joint Distributions &amp; Covariance Formulas</div>
+        <div class="formula-display">
+          $$\text{Marginal: } f_X(x) = \int_{-\infty}^{\infty} f_{X,Y}(x, y) \, dy, \qquad f_{Y|X}(y \mid x) = \frac{f_{X,Y}(x, y)}{f_X(x)}$$
+          $$\text{Independence: } f_{X,Y}(x, y) = f_X(x) f_Y(y) \iff X \perp Y$$
+          $$\text{Cov}(X, Y) = E[XY] - E[X]E[Y], \qquad \rho_{X,Y} = \frac{\text{Cov}(X, Y)}{\sigma_X \sigma_Y} \in [-1, 1]$$
+          $$\text{Var}(aX + bY) = a^2 \text{Var}(X) + b^2 \text{Var}(Y) + 2ab \, \text{Cov}(X, Y)$$
+        </div>
+        <div class="trap-box">
+          <strong>GATE TRAP ON CORRELATION:</strong> Zero correlation ($\text{Cov}(X,Y) = 0$) does <strong>NOT</strong> imply independence! Counterexample: Let $X \sim U(-1, 1)$ and $Y = X^2$. Then $\text{Cov}(X, Y) = E[X^3] - E[X]E[X^2] = 0 - 0 = 0$, but $Y$ is completely determined by $X$! (Note: Zero correlation DOES imply independence ONLY IF $X, Y$ are <em>jointly Gaussian</em>).
+        </div>
+      </div>
+
+      <!-- TOPIC 2.5 -->
+      <h3 class="section-heading">2.5 Probability Inequalities &amp; Limit Theorems</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Markov, Chebyshev, WLLN &amp; CLT</div>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Theorem / Inequality</th>
+              <th>Prerequisites</th>
+              <th>Mathematical Statement</th>
+              <th>When to Use in GATE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Markov's Inequality</strong></td>
+              <td>$X \ge 0$ (non-negative RV) and $a > 0$.</td>
+              <td>$P(X \ge a) \le \frac{E[X]}{a}$</td>
+              <td>When ONLY the mean $E[X]$ is known, and $X$ cannot be negative.</td>
+            </tr>
+            <tr>
+              <td><strong>Chebyshev's Inequality</strong></td>
+              <td>Any RV with finite mean $\mu$ and variance $\sigma^2$.</td>
+              <td>$P(|X - \mu| \ge k\sigma) \le \frac{1}{k^2}$<br>$P(|X - \mu| \ge \epsilon) \le \frac{\sigma^2}{\epsilon^2}$</td>
+              <td>When both mean $\mu$ and variance $\sigma^2$ are known, but distribution shape is completely unknown.</td>
+            </tr>
+            <tr>
+              <td><strong>Weak Law of Large Numbers (WLLN)</strong></td>
+              <td>$X_1, \dots, X_n$ i.i.d. with mean $\mu$ and finite variance.</td>
+              <td>$\lim_{n \to \infty} P(|\bar{X}_n - \mu| \ge \epsilon) = 0$</td>
+              <td>Convergence in probability of sample mean to population mean.</td>
+            </tr>
+            <tr>
+              <td><strong>Central Limit Theorem (CLT)</strong></td>
+              <td>$X_1, \dots, X_n$ i.i.d. with mean $\mu$ and variance $\sigma^2$.</td>
+              <td>$Z_n = \frac{\sum X_i - n\mu}{\sigma \sqrt{n}} = \frac{\bar{X}_n - \mu}{\sigma / \sqrt{n}} \xrightarrow{d} \mathcal{N}(0, 1)$</td>
+              <td>To approximate the probability of a sum or average of $n \ge 30$ independent random variables.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TOPIC 2.6 -->
+      <h3 class="section-heading">2.6 Mathematical Statistics, Estimation &amp; Hypothesis Testing (DA Sec 1)</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Estimators &amp; Maximum Likelihood Estimation (MLE)</div>
+        <p><strong>Sample Statistics:</strong></p>
+        <div class="formula-display">
+          $$\text{Sample Mean: } \bar{X} = \frac{1}{n} \sum_{i=1}^n X_i, \quad E[\bar{X}] = \mu, \quad \text{Var}(\bar{X}) = \frac{\sigma^2}{n}$$
+          $$\text{Unbiased Sample Variance: } S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2, \quad E[S^2] = \sigma^2$$
+        </div>
+        <p><strong>Maximum Likelihood Estimation Recipe:</strong></p>
+        <div class="formula-display">
+          $$L(\theta) = \prod_{i=1}^n f(x_i; \theta) \implies \ln L(\theta) = \sum_{i=1}^n \ln f(x_i; \theta)$$
+          $$\text{Set } \frac{\partial \ln L(\theta)}{\partial \theta} = 0 \quad \text{and check } \frac{\partial^2 \ln L}{\partial \theta^2} < 0$$
+        </div>
+        <div class="shortcut-box">
+          <strong>STANDARD MLE SHORTCUTS (Memorize for GATE):</strong>
+          <ul>
+            <li>Bernoulli$(p)$: $\hat{p}_{\text{MLE}} = \bar{X}$ (sample proportion).</li>
+            <li>Poisson$(\lambda)$: $\hat{\lambda}_{\text{MLE}} = \bar{X}$.</li>
+            <li>Exponential$(\lambda)$: $\hat{\lambda}_{\text{MLE}} = \frac{1}{\bar{X}}$.</li>
+            <li>Normal$(\mu, \sigma^2)$: $\hat{\mu}_{\text{MLE}} = \bar{X}$, but $\hat{\sigma}^2_{\text{MLE}} = \frac{1}{n}\sum(X_i-\bar{X})^2$ (biased! Divisor is $n$, NOT $n-1$).</li>
+            <li>Uniform$[0, \theta]$: $\hat{\theta}_{\text{MLE}} = X_{(n)} = \max(X_1, \dots, X_n)$ (found via boundary check, NOT derivative!).</li>
+          </ul>
+        </div>
+
+        <div class="formula-title" style="margin-top:16px;">Hypothesis Testing, Errors &amp; Test Statistics</div>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Decision / Reality</th>
+              <th>$H_0$ is TRUE</th>
+              <th>$H_0$ is FALSE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Reject $H_0$</strong></td>
+              <td><span style="color:var(--accent-rose); font-weight:700;">Type I Error ($\alpha$)</span><br>(Significance Level, False Alarm)</td>
+              <td><span style="color:var(--accent-green); font-weight:700;">Correct Decision</span><br>Power of Test = $1 - \beta$</td>
+            </tr>
+            <tr>
+              <td><strong>Fail to Reject $H_0$</strong></td>
+              <td><span style="color:var(--accent-green); font-weight:700;">Correct Decision</span><br>Confidence Level = $1 - \alpha$</td>
+              <td><span style="color:var(--accent-amber); font-weight:700;">Type II Error ($\beta$)</span><br>(Missed Detection)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="when-to-use-box">
+          <strong>WHEN TO USE $Z$-TEST VS $t$-TEST:</strong>
+          <ul>
+            <li>Use <strong>$Z$-Test</strong> ($Z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}$): When population variance $\sigma^2$ is <strong>KNOWN</strong>, or sample size $n \ge 30$ (by CLT).</li>
+            <li>Use <strong>$t$-Test</strong> ($t = \frac{\bar{X} - \mu_0}{S / \sqrt{n}}$ with $\nu = n-1$ degrees of freedom): When population is Normal, $\sigma^2$ is <strong>UNKNOWN</strong>, and sample size is small ($n < 30$).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PART 3: DISCRETE MATHEMATICS -->
+    <!-- =================================================================== -->
+    <div id="part-3-discrete-math">
+      <h2 class="part-heading part-3">
+        <span>PART 3: DISCRETE MATHEMATICS</span>
+        <span style="font-size:0.9rem; font-weight:600; opacity:0.85;">GATE CS (Sec 1 Core) &amp; DA (Graphs/AI)</span>
+      </h2>
+
+      <!-- TOPIC 3.1 -->
+      <h3 class="section-heading">3.1 Propositional &amp; First-Order Predicate Logic</h3>
+      
+      <div class="formula-card">
+        <div class="formula-title">Core Logical Equivalences &amp; Implications</div>
+        <div class="formula-display">
+          $$p \to q \equiv \neg p \vee q \equiv \neg q \to \neg p \quad (\text{Contrapositive})$$
+          $$\neg(p \to q) \equiv p \wedge \neg q \quad (\text{Negation of implication})$$
+          $$p \leftrightarrow q \equiv (p \to q) \wedge (q \to p) \equiv (p \wedge q) \vee (\neg p \wedge \neg q)$$
+          $$\text{De Morgan: } \neg(p \wedge q) \equiv \neg p \vee \neg q, \qquad \neg(p \vee q) \equiv \neg p \wedge \neg q$$
+        </div>
+        <div class="when-to-use-box">
+          <strong>WHEN TO USE:</strong>
+          <ul>
+            <li>To prove a statement is a <strong>Tautology</strong>: Show its truth value is ALWAYS True (or negation is unsatisfiable).</li>
+            <li>To invalidate an implication $A \to B$: Find a truth assignment where Premise $A = \text{True}$ and Conclusion $B = \text{False}$.</li>
+          </ul>
+        </div>
+        <div class="trap-box">
+          <strong>QUANTIFIER DISTRIBUTION TRAPS:</strong>
+          <ul>
+            <li>$\forall x (P(x) \wedge Q(x)) \equiv (\forall x P(x)) \wedge (\forall x Q(x))$ &nbsp;<strong>[VALID]</strong></li>
+            <li>$\forall x (P(x) \vee Q(x)) \not\equiv (\forall x P(x)) \vee (\forall x Q(x))$ &nbsp;<span style="color:var(--accent-rose); font-weight:700;">[INVALID TRAP!]</span> (LHS can be true while neither is universally true, e.g., "every integer is even or odd").</li>
+            <li>$\exists x (P(x) \vee Q(x)) \equiv (\exists x P(x)) \vee (\exists x Q(x))$ &nbsp;<strong>[VALID]</strong></li>
+            <li>$\exists x (P(x) \wedge Q(x)) \not\equiv (\exists x P(x)) \wedge (\exists x Q(x))$ &nbsp;<span style="color:var(--accent-rose); font-weight:700;">[INVALID TRAP!]</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TOPIC 3.2 -->
+      <h3 class="section-heading">3.2 Sets, Relations, POSETs &amp; Lattices</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Relations Counting on a Set of Size $n$</div>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Relation Property</th>
+              <th>Formal Condition on $R \subseteq A \times A$</th>
+              <th>Exact Formula ($|A| = n$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Total number of relations</td>
+              <td>Any subset of $A \times A$</td>
+              <td>$2^{n^2}$</td>
+            </tr>
+            <tr>
+              <td><strong>Reflexive</strong></td>
+              <td>$\forall a \in A, (a, a) \in R$</td>
+              <td>$2^{n(n-1)} = 2^{n^2 - n}$</td>
+            </tr>
+            <tr>
+              <td><strong>Irreflexive</strong></td>
+              <td>$\forall a \in A, (a, a) \notin R$</td>
+              <td>$2^{n(n-1)}$</td>
+            </tr>
+            <tr>
+              <td><strong>Symmetric</strong></td>
+              <td>$(a, b) \in R \implies (b, a) \in R$</td>
+              <td>$2^{\frac{n(n+1)}{2}}$</td>
+            </tr>
+            <tr>
+              <td><strong>Reflexive &amp; Symmetric</strong></td>
+              <td>Diagonal fixed present, upper triangle choices</td>
+              <td>$2^{\frac{n(n-1)}{2}}$</td>
+            </tr>
+            <tr>
+              <td><strong>Antisymmetric</strong></td>
+              <td>$(a, b) \in R \wedge (b, a) \in R \implies a = b$</td>
+              <td>$2^n \cdot 3^{\frac{n(n-1)}{2}}$</td>
+            </tr>
+            <tr>
+              <td><strong>Asymmetric</strong></td>
+              <td>$(a, b) \in R \implies (b, a) \notin R$ (no diagonals)</td>
+              <td>$3^{\frac{n(n-1)}{2}}$</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="formula-title" style="margin-top:16px;">POSETs &amp; Lattices</div>
+        <p>A relation is a <strong>POSET</strong> if it is <em>Reflexive, Antisymmetric, and Transitive</em>.</p>
+        <p>A POSET is a <strong>Lattice</strong> if for EVERY pair of elements $a, b$, there exists a unique Least Upper Bound ($a \vee b$, Join) and unique Greatest Lower Bound ($a \wedge b$, Meet).</p>
+        <div class="when-to-use-box">
+          <strong>LATTICE INSPECTION RULE:</strong> In a Hasse diagram, if two elements have multiple minimal upper bounds (i.e., paths diverge and meet at two incomparable vertices without a common lower one), it is <strong>NOT</strong> a lattice!
+        </div>
+      </div>
+
+      <!-- TOPIC 3.3 -->
+      <h3 class="section-heading">3.3 Combinatorics &amp; Generating Functions</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Counting Archetypes in GATE</div>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Counting Scenario</th>
+              <th>Mathematical Model</th>
+              <th>Formula</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$n$ distinct items into $r$ distinct bins</td>
+              <td>Functions $f: [n] \to [r]$</td>
+              <td>$r^n$</td>
+            </tr>
+            <tr>
+              <td>$n$ identical items into $r$ distinct bins</td>
+              <td><strong>Stars and Bars</strong>: $x_1 + \dots + x_r = n, \; x_i \ge 0$</td>
+              <td>$\binom{n + r - 1}{r - 1} = \binom{n + r - 1}{n}$</td>
+            </tr>
+            <tr>
+              <td>$n$ identical items into $r$ distinct bins, $x_i \ge 1$</td>
+              <td>Each bin gets at least 1: $y_1 + \dots + y_r = n - r$</td>
+              <td>$\binom{n - 1}{r - 1}$</td>
+            </tr>
+            <tr>
+              <td><strong>Derangements</strong> $D_n$</td>
+              <td>Permutations where no element appears in original place</td>
+              <td>$D_n = n! \sum_{k=0}^n \frac{(-1)^k}{k!} \approx \left[\frac{n!}{e}\right]$<br>$D_1=0, D_2=1, D_3=2, D_4=9, D_5=44$</td>
+            </tr>
+            <tr>
+              <td>Inclusion-Exclusion Principle</td>
+              <td>Union of 3 finite sets</td>
+              <td>$|A \cup B \cup C| = \sum |A| - \sum |A \cap B| + |A \cap B \cap C|$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TOPIC 3.4 -->
+      <h3 class="section-heading">3.4 Graph Theory</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Handshaking, Planarity, Trees &amp; Coloring Formulas</div>
+        <div class="formula-display">
+          $$\text{Handshaking Lemma: } \sum_{v \in V} \deg(v) = 2|E| \implies \text{Count of odd-degree vertices is always EVEN}$$
+          $$\text{Tree with } n \text{ vertices has exactly } n-1 \text{ edges. Cayley's Formula: } n^{n-2} \text{ labelled trees}$$
+          $$\text{Euler's Planar Formula: } V - E + R = 1 + C \quad (\text{For connected: } V - E + R = 2)$$
+          $$\text{Planar Edge Bounds: } E \le 3V - 6 \quad (\text{If triangle-free / bipartite: } E \le 2V - 4)$$
+        </div>
+        <div class="when-to-use-box">
+          <strong>WHEN TO USE EULERIAN VS HAMILTONIAN CRITERIA:</strong>
+          <ul>
+            <li><strong>Eulerian Circuit:</strong> Connected graph where <strong>EVERY</strong> vertex has an <strong>EVEN</strong> degree.</li>
+            <li><strong>Eulerian Path (Trail):</strong> Connected graph with <strong>EXACTLY TWO</strong> vertices of odd degree (start and end).</li>
+            <li><strong>Hamiltonian Cycle:</strong> Traverses every <em>vertex</em> exactly once. (NP-complete in general. Sufficient condition: Dirac's theorem: if $n \ge 3$ and $\deg(v) \ge n/2$ for all $v$, graph is Hamiltonian).</li>
+          </ul>
+        </div>
+        <div class="shortcut-box">
+          <strong>STANDARD CHROMATIC NUMBERS $\chi(G)$ (10-Second Recall):</strong>
+          <ul>
+            <li>Complete graph $K_n$: $\chi(K_n) = n$.</li>
+            <li>Bipartite graph $K_{m,n}$ ($E > 0$): $\chi(G) = 2$ (Graph is 2-colorable $\iff$ bipartite $\iff$ no odd cycles).</li>
+            <li>Odd cycle $C_{2k+1}$: $\chi(C_{2k+1}) = 3$. Even cycle $C_{2k}$: $\chi(C_{2k}) = 2$.</li>
+            <li>Tree ($n \ge 2$): $\chi(T) = 2$.</li>
+            <li>Planar graph (Four Color Theorem): $\chi(G) \le 4$.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TOPIC 3.5 -->
+      <h3 class="section-heading">3.5 Groups &amp; Abstract Algebra</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Algebraic Structures Hierarchy &amp; Lagrange's Theorem</div>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Structure</th>
+              <th>Closure</th>
+              <th>Associativity</th>
+              <th>Identity</th>
+              <th>Inverses</th>
+              <th>Commutativity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Semigroup</strong></td>
+              <td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td>
+            </tr>
+            <tr>
+              <td><strong>Monoid</strong></td>
+              <td>✅</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td>
+            </tr>
+            <tr>
+              <td><strong>Group</strong></td>
+              <td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td>
+            </tr>
+            <tr>
+              <td><strong>Abelian Group</strong></td>
+              <td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><strong>Lagrange's Theorem:</strong> If $G$ is a finite group and $H$ is a subgroup of $G$, then $|H|$ divides $|G|$. Consequently, the order of any element $a \in G$ divides $|G|$, and $a^{|G|} = e$.</p>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PART 4: CALCULUS & OPTIMIZATION -->
+    <!-- =================================================================== -->
+    <div id="part-4-calculus-opt">
+      <h2 class="part-heading part-4">
+        <span>PART 4: CALCULUS &amp; OPTIMIZATION</span>
+        <span style="font-size:0.9rem; font-weight:600; opacity:0.85;">GATE CS (Sec 1) &amp; DA (Sec 3)</span>
+      </h2>
+
+      <!-- TOPIC 4.1 -->
+      <h3 class="section-heading">4.1 Limits, Continuity &amp; Mean Value Theorems</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">L'Hôpital's Rule &amp; Mean Value Theorems</div>
+        <p><strong>L'Hôpital's Rule:</strong> If $\lim \frac{f(x)}{g(x)}$ evaluates to $\left[\frac{0}{0}\right]$ or $\left[\frac{\pm\infty}{\pm\infty}\right]$:</p>
+        <div class="formula-display">
+          $$\lim_{x \to c} \frac{f(x)}{g(x)} = \lim_{x \to c} \frac{f'(x)}{g'(x)}$$
+        </div>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Theorem</th>
+              <th>Hypothesis on $[a, b]$</th>
+              <th>Guaranteed Conclusion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Rolle's Theorem</strong></td>
+              <td>Continuous on $[a,b]$, differentiable on $(a,b)$, and $f(a) = f(b)$.</td>
+              <td>$\exists c \in (a, b)$ such that $f'(c) = 0$.</td>
+            </tr>
+            <tr>
+              <td><strong>Lagrange's Mean Value Theorem (LMVT)</strong></td>
+              <td>Continuous on $[a,b]$, differentiable on $(a,b)$.</td>
+              <td>$\exists c \in (a, b)$ such that $f'(c) = \frac{f(b) - f(a)}{b - a}$.</td>
+            </tr>
+            <tr>
+              <td><strong>Cauchy's MVT</strong></td>
+              <td>$f, g$ continuous on $[a,b]$, differentiable on $(a,b)$, $g'(x) \neq 0$.</td>
+              <td>$\exists c \in (a, b)$ such that $\frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}$.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="shortcut-box">
+          <strong>STANDARD LIMIT SHORTCUTS:</strong>
+          $$\lim_{x \to 0} \frac{\sin x}{x} = 1, \quad \lim_{x \to 0} \frac{1 - \cos x}{x^2} = \frac{1}{2}, \quad \lim_{x \to 0} \frac{e^x - 1}{x} = 1, \quad \lim_{x \to 0} (1 + x)^{1/x} = e$$
+        </div>
+      </div>
+
+      <!-- TOPIC 4.2 -->
+      <h3 class="section-heading">4.2 Single-Variable Maxima, Minima &amp; Leibniz Integral Rule</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Derivative Tests &amp; Leibniz Differentiation Under Integral</div>
+        <p><strong>Critical Points:</strong> Points where $f'(x) = 0$ or $f'(x)$ does not exist.</p>
+        <div class="formula-display">
+          $$f''(x_0) > 0 \implies \text{Local Minimum at } x_0$$
+          $$f''(x_0) < 0 \implies \text{Local Maximum at } x_0$$
+          $$f''(x_0) = 0 \implies \text{Inconclusive (test higher derivatives: if 1st non-vanishing is odd order } \implies \text{inflection point)}$$
+        </div>
+        <p><strong>Leibniz Rule:</strong> For differentiating an integral with variable limits:</p>
+        <div class="formula-display">
+          $$\frac{d}{dx} \left[ \int_{u(x)}^{v(x)} f(t) \, dt \right] = f(v(x)) \cdot v'(x) - f(u(x)) \cdot u'(x)$$
+        </div>
+        <div class="when-to-use-box">
+          <strong>WHEN TO USE LEIBNIZ:</strong> Whenever GATE asks for $\lim_{x \to 0} \frac{\int_0^{x^2} \sin(t) dt}{x^4}$. Apply L'Hôpital by differentiating numerator using Leibniz rule!
+        </div>
+      </div>
+
+      <!-- TOPIC 4.3 -->
+      <h3 class="section-heading">4.3 Multivariable Calculus: Gradients, Directional Derivatives &amp; Hessians</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Multivariable Differential Operators</div>
+        <div class="formula-display">
+          $$\text{Gradient: } \nabla f(\mathbf{x}) = \left[ \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n} \right]^T$$
+          $$\text{Directional Derivative in direction of unit vector } \mathbf{u}: \quad D_{\mathbf{u}} f = \nabla f \cdot \mathbf{u} = \|\nabla f\| \cos \theta$$
+          $$\text{Hessian Matrix: } H(\mathbf{x}) = \begin{bmatrix} \frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1 \partial x_2} \\ \frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2} \end{bmatrix}$$
+        </div>
+        <div class="when-to-use-box">
+          <strong>KEY DIRECTIONAL DERIVATIVE FACTS:</strong>
+          <ul>
+            <li>Maximum rate of increase of $f$ occurs in the direction of the gradient $\nabla f$, and the maximum rate equals $\|\nabla f\|$.</li>
+            <li>Maximum rate of decrease occurs in the direction of $-\nabla f$, with rate $-\|\nabla f\|$.</li>
+            <li>Rate of change is zero in any direction orthogonal to $\nabla f$ (tangent to the level curve/surface).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TOPIC 4.4 -->
+      <h3 class="section-heading">4.4 Multivariable Optimization (Unconstrained &amp; Constrained)</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Stationary Point Classification in 2 Variables</div>
+        <p>Set $\nabla f(x, y) = \mathbf{0} \implies \frac{\partial f}{\partial x} = 0, \frac{\partial f}{\partial y} = 0$. Let $r = f_{xx}, s = f_{xy}, t = f_{yy}$ and discriminant $D = rt - s^2 = \det(H)$:</p>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Discriminant $D = rt - s^2$</th>
+              <th>$r = f_{xx}$</th>
+              <th>Hessian Eigenvalues $\lambda_1, \lambda_2$</th>
+              <th>Classification of $(x_0, y_0)$</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$D > 0$</td>
+              <td>$r > 0$</td>
+              <td>$\lambda_1 > 0, \lambda_2 > 0$ (Positive Definite)</td>
+              <td><span style="color:var(--accent-green); font-weight:700;">Local Minimum</span></td>
+            </tr>
+            <tr>
+              <td>$D > 0$</td>
+              <td>$r < 0$</td>
+              <td>$\lambda_1 < 0, \lambda_2 < 0$ (Negative Definite)</td>
+              <td><span style="color:var(--accent-rose); font-weight:700;">Local Maximum</span></td>
+            </tr>
+            <tr>
+              <td>$D < 0$</td>
+              <td>Any</td>
+              <td>$\lambda_1 \cdot \lambda_2 < 0$ (Indefinite: opposite signs)</td>
+              <td><span style="color:var(--accent-amber); font-weight:700;">Saddle Point</span></td>
+            </tr>
+            <tr>
+              <td>$D = 0$</td>
+              <td>Any</td>
+              <td>At least one eigenvalue is $0$</td>
+              <td><strong>Inconclusive</strong> (requires higher order analysis)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TOPIC 4.5 -->
+      <h3 class="section-heading">4.5 Convexity, KKT Conditions &amp; Gradient Descent (DA Sec 3)</h3>
+
+      <div class="formula-card">
+        <div class="formula-title">Convex Functions &amp; Karush-Kuhn-Tucker (KKT) Conditions</div>
+        <p><strong>Convexity Criteria:</strong></p>
+        <div class="formula-display">
+          $$\text{Def: } f(\theta x + (1-\theta)y) \le \theta f(x) + (1-\theta)f(y) \quad \forall \theta \in [0, 1]$$
+          $$\text{1st-Order: } f(y) \ge f(x) + \nabla f(x)^T (y - x)$$
+          $$\text{2nd-Order: } \nabla^2 f(x) = H(x) \succeq 0 \quad (\text{Hessian is Positive Semi-Definite everywhere})$$
+        </div>
+        <div class="shortcut-box">
+          <strong>CONVEXITY SUPER-PROPERTY:</strong> For any convex function over a convex set, <strong>ANY local minimum is GUARANTEED to be a global minimum!</strong> If $f$ is strictly convex ($H \succ 0$), the global minimum is unique.
+        </div>
+
+        <div class="formula-title" style="margin-top:16px;">KKT Conditions for Non-Linear Optimization</div>
+        <p>To minimize $f(x)$ subject to equality constraints $h_j(x) = 0$ ($j=1..m$) and inequality constraints $g_i(x) \le 0$ ($i=1..k$):</p>
+        <div class="formula-display">
+          $$\mathcal{L}(x, \lambda, \mu) = f(x) + \sum_{j=1}^m \lambda_j h_j(x) + \sum_{i=1}^k \mu_i g_i(x)$$
+          $$\text{1. Stationarity: } \nabla_x \mathcal{L} = \nabla f(x^*) + \sum_{j=1}^m \lambda_j \nabla h_j(x^*) + \sum_{i=1}^k \mu_i \nabla g_i(x^*) = \mathbf{0}$$
+          $$\text{2. Primal Feasibility: } g_i(x^*) \le 0 \quad (\forall i), \quad h_j(x^*) = 0 \quad (\forall j)$$
+          $$\text{3. Dual Feasibility: } \mu_i \ge 0 \quad (\forall i)$$
+          $$\text{4. Complementary Slackness: } \mu_i g_i(x^*) = 0 \quad (\forall i)$$
+        </div>
+        <div class="when-to-use-box">
+          <strong>HOW TO SOLVE KKT PROBLEMS IN GATE:</strong>
+          <ul>
+            <li>Examine complementary slackness $\mu_i g_i(x) = 0$. For each inequality, branch into two cases:
+              <ul>
+                <li><strong>Case A (Inactive constraint):</strong> $g_i(x) < 0 \implies \mu_i = 0$. Solve unconstrained gradient equation.</li>
+                <li><strong>Case B (Active constraint):</strong> $g_i(x) = 0 \implies \mu_i \ge 0$. Solve boundary system.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="formula-title" style="margin-top:16px;">Gradient Descent Algorithm</div>
+        <div class="formula-display">
+          $$x^{(t+1)} = x^{(t)} - \eta \nabla f(x^{(t)})$$
+        </div>
+        <p>Where $\eta > 0$ is the learning rate. For $L$-Lipschitz smooth functions ($\|\nabla f(x) - \nabla f(y)\| \le L \|x - y\|$), convergence is guaranteed when $\eta < \frac{2}{L}$.</p>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PART 5: MASTER TRAPS DIRECTORY -->
+    <!-- =================================================================== -->
+    <div id="part-5-master-traps">
+      <h2 class="part-heading part-5">
+        <span>PART 5: MASTER 40 GATE TRAPS DIRECTORY</span>
+        <span style="font-size:0.9rem; font-weight:600; opacity:0.85;">High-Risk Pitfalls Across All 4 Modules</span>
+      </h2>
+
+      <div class="formula-card">
+        <p>Review this checklist the evening before your exam. These 40 traps account for over 80% of negative marks in GATE Engineering Mathematics:</p>
+
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th style="width:5%;">#</th>
+              <th style="width:20%;">Topic</th>
+              <th style="width:37%;">Common Student Misconception</th>
+              <th style="width:38%;">Mathematical Fact / Correct Rule</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Linear Algebra</td>
+              <td>Assuming $\det(A+B) = \det(A) + \det(B)$.</td>
+              <td><strong>FALSE!</strong> In general, $\det(A+B) \neq \det(A) + \det(B)$. Determinant is NOT linear.</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Linear Algebra</td>
+              <td>Writing $\det(cA) = c\det(A)$ for $n \times n$ matrix.</td>
+              <td>$\det(cA) = c^n \det(A)$. Factor $c$ from each of the $n$ rows.</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Linear Algebra</td>
+              <td>Assuming $AB = 0 \implies A = 0$ or $B = 0$.</td>
+              <td>Matrices have non-zero zero divisors! Example: $\begin{bmatrix}0&1\\0&0\end{bmatrix}^2 = 0$.</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Linear Algebra</td>
+              <td>Believing repeated eigenvalues mean non-diagonalizable.</td>
+              <td>Diagonalizability requires $\text{GM} = \text{AM}$. The identity matrix $I$ has repeated $\lambda$ and is diagonal!</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Linear Algebra</td>
+              <td>Assuming orthogonal matrix must have symmetric entries.</td>
+              <td>Orthogonal means $Q^T Q = I$. Its columns are orthonormal. Eigenvalues are on unit circle ($|\lambda|=1$).</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Linear Algebra</td>
+              <td>Assuming rank of product equals product of ranks.</td>
+              <td>$\text{Rank}(AB) \le \min(\text{Rank}(A), \text{Rank}(B))$. By Sylvester: $\text{Rank}(AB) \ge \text{Rank}(A) + \text{Rank}(B) - n$.</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Prob &amp; Stats</td>
+              <td>Assuming Mutually Exclusive means Independent.</td>
+              <td>For positive probability events, mutually exclusive events can <strong>NEVER</strong> be independent ($P(A \cap B) = 0 \neq P(A)P(B)$).</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Prob &amp; Stats</td>
+              <td>Assuming $\text{Cov}(X, Y) = 0 \implies X, Y$ are independent.</td>
+              <td>Zero covariance only measures lack of <em>linear</em> association. Non-linear dependence can still exist (e.g. $Y = X^2$).</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Prob &amp; Stats</td>
+              <td>Dividing by $n$ when computing unbiased sample variance $S^2$.</td>
+              <td>Unbiased sample variance uses divisor $(n-1)$: $S^2 = \frac{1}{n-1}\sum(X_i-\bar{X})^2$. MLE uses divisor $n$.</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Prob &amp; Stats</td>
+              <td>Applying Chebyshev to non-symmetric distributions incorrectly.</td>
+              <td>$P(|X-\mu|\ge k\sigma) \le \frac{1}{k^2}$ holds for <em>any</em> distribution with finite variance. But one-sided bounds cannot simply be halved!</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Prob &amp; Stats</td>
+              <td>Confusing Type I error and Type II error.</td>
+              <td>$\alpha = P(\text{Reject } H_0 \mid H_0 \text{ is True})$. $\beta = P(\text{Fail to reject } H_0 \mid H_0 \text{ is False})$. Power = $1 - \beta$.</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Discrete Math</td>
+              <td>Assuming $\forall x (P(x) \vee Q(x)) \equiv \forall x P(x) \vee \forall x Q(x)$.</td>
+              <td><strong>INVALID!</strong> Universal quantifier $\forall$ does NOT distribute over disjunction $\vee$.</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>Discrete Math</td>
+              <td>Believing Empty Relation is Reflexive.</td>
+              <td>On a non-empty set $A$, empty relation $\emptyset$ is <strong>Irreflexive</strong>, <strong>Symmetric</strong>, and <strong>Transitive</strong>, but NOT reflexive!</td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>Discrete Math</td>
+              <td>Assuming every POSET is a lattice.</td>
+              <td>A POSET is a lattice only if EVERY pair of elements has a UNIQUE LUB and UNIQUE GLB.</td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>Discrete Math</td>
+              <td>Counting graphs: confusing labelled vs unlabelled.</td>
+              <td>Number of labelled graphs on $n$ vertices is $2^{\binom{n}{2}}$. Number of labelled trees is $n^{n-2}$.</td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td>Discrete Math</td>
+              <td>Assuming planar graph cannot have triangles.</td>
+              <td>Planar graphs can have triangles! $E \le 3V - 6$ is the bound. If triangle-free, the tighter bound $E \le 2V - 4$ applies.</td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td>Calculus</td>
+              <td>Applying L'Hôpital's rule without checking $\left[\frac{0}{0}\right]$ or $\left[\frac{\infty}{\infty}\right]$.</td>
+              <td>If $\lim \frac{f(x)}{g(x)}$ is finite/finite, differentiating gives a completely WRONG answer. Always check indeterminate form first.</td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>Calculus</td>
+              <td>Assuming $f'(c) = 0 \implies$ local extremum.</td>
+              <td>$f'(c) = 0$ is only a necessary condition. $f(x) = x^3$ has $f'(0) = 0$, but $x=0$ is an inflection point, not an extremum!</td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td>Calculus</td>
+              <td>Forgetting boundary endpoints in closed interval optimization.</td>
+              <td>Global max/min on $[a, b]$ can occur at critical points <em>OR</em> at the boundary endpoints $a$ or $b$. Always evaluate $f(a)$ and $f(b)$!</td>
+            </tr>
+            <tr>
+              <td>20</td>
+              <td>Calculus &amp; Opt</td>
+              <td>In 2D optimization: claiming $D = rt - s^2 < 0$ means inconclusive.</td>
+              <td>If $D < 0$, it is definitively a <strong>SADDLE POINT</strong>! It is inconclusive ONLY if $D = 0$.</td>
+            </tr>
+            <tr>
+              <td>21</td>
+              <td>Optimization</td>
+              <td>Assuming KKT multiplier for inequality can be negative.</td>
+              <td>For minimization with $g_i(x) \le 0$, the dual feasibility condition mandates $\mu_i \ge 0$. If you get $\mu_i < 0$, that constraint is inactive!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+</body>
+</html>

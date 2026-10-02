@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Linear Algebra Theory &amp; Formula Handbook | GATE CS &amp; DA</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-primary: #0a0e17;
+      --bg-secondary: #121826;
+      --bg-card: #182234;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: #24324a;
+      --code-bg: #0f172a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    header {
+      background: rgba(18, 24, 38, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-title { font-size: 1.25rem; font-weight: 700; color: #f8fafc; }
+    .header-subtitle { font-size: 0.85rem; color: var(--text-muted); }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    h1 { font-size: 2.2rem; font-weight: 800; color: #f8fafc; margin-bottom: 16px; border-bottom: 2px solid var(--accent-blue); padding-bottom: 12px; }
+    h2 { font-size: 1.5rem; font-weight: 700; color: var(--accent-cyan); margin-top: 40px; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+    h3 { font-size: 1.15rem; font-weight: 600; color: #e2e8f0; margin-top: 24px; margin-bottom: 12px; }
+    p { margin-bottom: 14px; color: #cbd5e1; font-size: 1rem; }
+    ul, ol { margin-left: 24px; margin-bottom: 16px; color: #cbd5e1; }
+    li { margin-bottom: 8px; }
+    .formula-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      margin: 16px 0;
+      text-align: center;
+      color: #38bdf8;
+      font-size: 1.05rem;
+    }
+    .info-card {
+      background: var(--bg-secondary);
+      border-left: 4px solid var(--accent-cyan);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 20px;
+      margin: 20px 0;
+    }
+    .trap-card {
+      background: rgba(244, 63, 94, 0.08);
+      border-left: 4px solid var(--accent-rose);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 20px;
+      margin: 20px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95rem;
+    }
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th {
+      background: var(--bg-card);
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+    tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .back-btn:hover { background: var(--accent-blue); color: white; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <div class="header-title">Linear Algebra Complete Theory Handbook</div>
+      <div class="header-subtitle">GATE CS (Section 1) &amp; GATE DA (Section 2) Complete Reference</div>
+    </div>
+    <a href="index.html" class="back-btn">◀ Back to Portal</a>
+  </header>
+
+  <div class="container">
+    <h1>Complete Linear Algebra Theory &amp; Formulas</h1>
+    <p>Comprehensive reference covering every definition, theorem, formula, and edge-case tested in GATE CS and GATE DA.</p>
+
+    <!-- Section 1 -->
+    <h2>1. Matrices &amp; Special Matrix Types</h2>
+    <p>Let $A \in \mathbb{R}^{m \times n}$. Standard definitions and properties:</p>
+    <ul>
+      <li><strong>Square Matrix:</strong> $m = n$.</li>
+      <li><strong>Symmetric Matrix:</strong> $A^T = A$ ($a_{ij} = a_{ji}$). Always square with strictly real eigenvalues.</li>
+      <li><strong>Skew-Symmetric Matrix:</strong> $A^T = -A$ ($a_{ij} = -a_{ji}$). Diagonal entries are identically 0 ($a_{ii} = 0$). For odd $n$, $\det(A) = 0$.</li>
+      <li><strong>Orthogonal Matrix:</strong> $A^T A = A A^T = I \iff A^{-1} = A^T$. $\det(A) = \pm 1$. Columns form an orthonormal basis.</li>
+      <li><strong>Trace:</strong> $\text{Trace}(A) = \sum_{i=1}^n a_{ii} = \sum_{i=1}^n \lambda_i$. Cyclic invariance: $\text{Trace}(AB) = \text{Trace}(BA)$.</li>
+    </ul>
+
+    <!-- Section 2 -->
+    <h2>2. Determinants &amp; Shortcut Theorems</h2>
+    <ul>
+      <li><strong>Scalar rule:</strong> $\det(k A) = k^n \det(A)$ for an $n \times n$ matrix $A$.</li>
+      <li><strong>Product rule:</strong> $\det(AB) = \det(A) \det(B) = \det(BA)$ (holds even if $AB \neq BA$).</li>
+      <li><strong>Inverse rule:</strong> $\det(A^{-1}) = \frac{1}{\det(A)}$.</li>
+      <li><strong>Block Triangular:</strong> $\det \begin{pmatrix} A & C \\ 0 & B \end{pmatrix} = \det(A) \cdot \det(B)$.</li>
+      <li><strong>Adjoint formulas:</strong>
+        <div class="formula-block">
+          $|\text{adj}(A)| = |A|^{n-1} \qquad |\text{adj}(\text{adj}(A))| = |A|^{(n-1)^2} \qquad \text{adj}(\text{adj}(A)) = |A|^{n-2} A$
+        </div>
+      </li>
+    </ul>
+
+    <!-- Section 3 -->
+    <h2>3. Matrix Rank &amp; The Rank-Nullity Theorem</h2>
+    <ul>
+      <li><strong>Row Rank = Column Rank = $\text{Rank}(A) \le \min(m, n)$</strong>.</li>
+      <li><strong>Rank-Nullity Theorem:</strong>
+        <div class="formula-block">
+          $\text{Rank}(A) + \text{Nullity}(A) = n \quad (\text{number of columns})$
+        </div>
+      </li>
+      <li><strong>Outer Product:</strong> For non-zero vectors $u \in \mathbb{R}^m, v \in \mathbb{R}^n$, $\text{Rank}(u v^T) = 1$ and $\text{Nullity} = n - 1$.</li>
+      <li><strong>Sylvester's Inequality:</strong> $\text{Rank}(AB) \ge \text{Rank}(A) + \text{Rank}(B) - n$.</li>
+      <li><strong>Gram Matrix:</strong> $\text{Rank}(A^T A) = \text{Rank}(A A^T) = \text{Rank}(A)$, and $\text{Null}(A^T A) = \text{Null}(A)$.</li>
+    </ul>
+
+    <!-- Section 4 -->
+    <h2>4. Systems of Linear Equations ($Ax = b$)</h2>
+    <table>
+      <thead>
+        <tr><th>Rank Condition</th><th>Consistency</th><th>Number of Solutions</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>$\text{Rank}(A) < \text{Rank}([A|b])$</td><td>Inconsistent</td><td><strong>NO SOLUTION (0)</strong></td></tr>
+        <tr><td>$\text{Rank}(A) = \text{Rank}([A|b]) = n$</td><td>Consistent</td><td><strong>UNIQUE SOLUTION (1)</strong></td></tr>
+        <tr><td>$\text{Rank}(A) = \text{Rank}([A|b]) < n$</td><td>Consistent</td><td><strong>INFINITELY MANY</strong> ($n - r$ free variables)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Section 5 -->
+    <h2>5. Eigenvalues, Cayley-Hamilton &amp; Diagonalization</h2>
+    <ul>
+      <li><strong>Characteristic Equation:</strong> $\det(A - \lambda I) = 0$.</li>
+      <li><strong>Sum of Eigenvalues:</strong> $\sum \lambda_i = \text{Trace}(A)$.</li>
+      <li><strong>Product of Eigenvalues:</strong> $\prod \lambda_i = \det(A)$.</li>
+      <li><strong>Cayley-Hamilton:</strong> Every matrix satisfies $p(A) = 0$. Used for calculating inverse $A^{-1}$ and high powers $A^m$.</li>
+      <li><strong>Spectral Theorem:</strong> Any real symmetric matrix ($A^T = A$) has strictly real eigenvalues and can be orthogonally diagonalized: $A = Q \Lambda Q^T$ with $Q^T Q = I$.</li>
+    </ul>
+
+    <!-- Section 6 -->
+    <h2>6. SVD (Singular Value Decomposition) &amp; Projections (GATE DA Core)</h2>
+    <ul>
+      <li><strong>SVD Formula:</strong> $A = U \Sigma V^T$ where $U, V$ are orthogonal matrices and $\Sigma$ is diagonal with singular values $\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_r > 0$.</li>
+      <li><strong>Singular Value Identity:</strong> $\sigma_i = \sqrt{\lambda_i(A^T A)}$. Singular values are <strong>ALWAYS real and non-negative ($\sigma_i \ge 0$)</strong>.</li>
+      <li><strong>Matrix Norms:</strong>
+        <br>• Spectral Norm: $\|A\|_2 = \sigma_{\max} = \sigma_1$
+        <br>• Frobenius Norm: $\|A\|_F = \sqrt{\sum \sigma_i^2} = \sqrt{\text{Trace}(A^T A)}$
+        <br>• Condition Number: $\kappa_2(A) = \frac{\sigma_{\max}}{\sigma_{\min}}$
+      </li>
+      <li><strong>Orthogonal Projection Matrix:</strong> $P = A(A^T A)^{-1} A^T$ (satisfies $P^2 = P$ and $P^T = P$).</li>
+      <li><strong>Quadratic Forms:</strong> $Q(x) = x^T A x$. Positive Definite $\iff$ all $\lambda_i > 0 \iff$ all leading principal minors $> 0$.</li>
+    </ul>
+
+    <!-- Section 7 -->
+    <h2>7. GATE Trap Alert Summary</h2>
+    <div class="trap-card">
+      <ul style="margin: 0; padding-left: 20px;">
+        <li>$\det(A + B) \neq \det(A) + \det(B)$ in general!</li>
+        <li>$\text{Rank}(A) + \text{Nullity}(A) = n$ (columns), NEVER $m$!</li>
+        <li>Invertible does NOT mean diagonalizable (e.g. defective triangular matrices).</li>
+        <li>Singular values can NEVER be negative, even if eigenvalues are negative.</li>
+        <li>$Ax = 0$ is NEVER inconsistent; it always has the trivial solution $x = 0$.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+</body>
+</html>
